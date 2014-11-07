@@ -1,0 +1,74 @@
+#####
+## Análisis del ramo 33 desde 1998 a 2014
+# Este script genera mapas interactivos por estado basados en:
+# 1) http://rmaps.github.io/blog/posts/animated-choropleths/index.html y
+# 2) http://bl.ocks.org/diegovalle/8967565
+# 3) Trabajo de México Evalúa
+# Fuente de los datos: Informes de Gobierno
+
+#####
+# Cargar paquetes para mapas interactivos
+source("lib_mapas.R") # Quitar comentarios en el script para instalar paquetes por primera vez
+
+######
+## Cargar datos
+data  <- read.csv("r_33_long_14.csv", encoding="utf8")
+head(data)
+# Agregar códigos de los estados
+codes  <- read.csv("state_code.csv")
+head(codes)
+data  <- merge(data, codes, by.x="id", by.y="state_code")
+head(data)
+#####
+## Cambiar de formato wide a long
+require(reshape2)
+temp  <- data[,c(-4)]
+names(temp)
+temp  <- melt(temp, id=c("id", "estado","yr","name"))
+head(temp)
+data  <- temp
+
+##### 
+## Transformar a valores reales con el deflactor del Pib base 2008
+# Fuente: International Monetary Fund, World Economic Outlook Database, October 2014
+def  <- read.csv("deflactor.csv")
+def$deflactor  <- def$deflactor / 100
+data  <- merge(data, def, by.x="yr", by.y="year")
+head(data[data$yr == 2008,])
+data$valReal  <- with(data, value / deflactor, na.rm=T)
+head(data)
+# Datos en miles de millones de pesos
+#data$valReal  <- data$valReal / 1000
+#####
+## Preparar datos para construir mapa interactivo
+# Eliminar obs nacional
+data  <- subset(data, data$id != 0)
+ramos  <- unique(data$variable)
+# Cambiar nombres
+head(data)
+names(data)  <- c("year","state_code","long_name","name","variable","deflactor","value",
+                  "valReal")
+head(data)
+ramos
+# Reemplazar NA's con ceros
+data[is.na(data)] <- 0
+r33_total <- subset(data, data$variable == "r33_total")
+r33_fasa  <- subset(data, data$variable == "r33_fasa")
+r33_fise  <- subset(data, data$variable == "r33_fise")
+r33_multiple  <- subset(data, data$variable == "r33_multiple")
+r33_infraeduca  <- subset(data, data$variable == "r33_infraeduca")
+r33_fortamun  <- subset(data, data$variable == "r33_fortamun")
+r33_segurid  <- subset(data, data$variable == "r33_segurid")
+r33_faeb  <- subset(data, data$variable == "r33_faeb")
+r33_fis  <- subset(data, data$variable == "r33_fis")
+r33_fism  <- subset(data, data$variable == "r33_fism")
+r33_alimenticio  <- subset(data, data$variable == "r33_alimenticio")
+r33_edusuperior  <- subset(data, data$variable == "r33_edusuperior")
+r33_edutecnologica  <- subset(data, data$variable == "r33_edutecnologica")
+r33_fortaestados  <- subset(data, data$variable == "r33_fortaestados")
+
+#####
+# Desactivar notación científica
+options(scipen=999)
+#####
+# Ejecutar scripts para cada mapa por ramo
