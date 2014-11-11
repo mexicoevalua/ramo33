@@ -1,0 +1,6498 @@
+<!doctype HTML>
+<meta charset = 'utf-8'>
+<html>
+  <head>
+    
+    <script src='http://d3js.org/d3.v3.min.js' type='text/javascript'></script>
+    <script src='http://d3js.org/topojson.v1.min.js' type='text/javascript'></script>
+    <script src='http://datamaps.github.io/scripts/datamaps.all.min.js' type='text/javascript'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js' type='text/javascript'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js' type='text/javascript'></script>
+    
+    <style>
+    .rChart {
+      display: block;
+      margin-left: auto; 
+      margin-right: auto;
+      width: 800px;
+      height: 400px;
+    }  
+    </style>
+    
+  </head>
+  <body ng-app ng-controller='rChartsCtrl'>
+    
+    
+                   <div id = 'chart_1' class = 'rChart datamaps'>
+                   <input id='slider' type='range' min=1998 max=2014 ng-model='year' width=200>
+                   <span ng-bind='year'></span>
+                   
+                   <script>
+                   function rChartsCtrl($scope){
+                   $scope.year = '2014';
+                   $scope.$watch('year', function(newYear){
+                   mapchart_1.updateChoropleth(chartParams.newData[newYear]);
+                   })
+                   }
+                   </script>
+                   </div>       
+    <script id='popup-template' type='text/x-handlebars-template'>
+    
+</script>
+<script>
+  var chartParams = {
+ "dom": "chart_1",
+"width":    800,
+"height":    400,
+"geographyConfig": {
+ "dataUrl": "shapefiles/mx_states.json",
+"popupTemplate":  function(geography, data) { //this function should just return a string
+    return '<div class=hoverinfo>' + geography.properties.name + ': ' + data.valReal + '</div>';
+    }   
+},
+"scope": "states",
+"labels": true,
+"bodyattrs": "ng-app ng-controller='rChartsCtrl'",
+"setProjection":  function( element, options ) {
+  
+  var projection, path;
+  
+  projection = d3.geo.mercator()
+  .center([-90, 24])
+  .scale(element.offsetWidth)
+  .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+  
+  path = d3.geo.path()
+  .projection( projection );
+  
+  return {path: path, projection: projection};
+  } ,
+"fills": {
+ "[0 - 373)": "#EDF8E9",
+"[373 - 629)": "#BAE4B3",
+"[629 - 978)": "#74C476",
+"[978 - 1,482)": "#31A354",
+"[1,482 - 6,446]": "#006D2C",
+"defaultFill": "#BD0026" 
+},
+"data": {
+ "BCS": {
+ "year": 1998,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":   27.7,
+"value": 0.48188,
+"valReal": "   57",
+"fillKey": "[0 - 373)" 
+},
+"ZAC": {
+ "year": 1998,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":   98.7,
+"value": 0.48188,
+"valReal": "  205",
+"fillKey": "[0 - 373)" 
+},
+"CAM": {
+ "year": 1998,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":   47.5,
+"value": 0.48188,
+"valReal": "   99",
+"fillKey": "[0 - 373)" 
+},
+"COL": {
+ "year": 1998,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":     36,
+"value": 0.48188,
+"valReal": "   75",
+"fillKey": "[0 - 373)" 
+},
+"HGO": {
+ "year": 1998,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":    156,
+"value": 0.48188,
+"valReal": "  324",
+"fillKey": "[0 - 373)" 
+},
+"JAL": {
+ "year": 1998,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor":  442.5,
+"value": 0.48188,
+"valReal": "  918",
+"fillKey": "[629 - 978)" 
+},
+"MOR": {
+ "year": 1998,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  106.5,
+"value": 0.48188,
+"valReal": "  221",
+"fillKey": "[0 - 373)" 
+},
+"SIN": {
+ "year": 1998,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":  179.1,
+"value": 0.48188,
+"valReal": "  372",
+"fillKey": "[0 - 373)" 
+},
+"GTO": {
+ "year": 1998,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor":  325.4,
+"value": 0.48188,
+"valReal": "  675",
+"fillKey": "[629 - 978)" 
+},
+"TAM": {
+ "year": 1998,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor":  186.6,
+"value": 0.48188,
+"valReal": "  387",
+"fillKey": "[373 - 629)" 
+},
+"BC": {
+ "year": 1998,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor":    156,
+"value": 0.48188,
+"valReal": "  324",
+"fillKey": "[0 - 373)" 
+},
+"MICH": {
+ "year": 1998,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor":  285.9,
+"value": 0.48188,
+"valReal": "  593",
+"fillKey": "[373 - 629)" 
+},
+"OAX": {
+ "year": 1998,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor":  238.5,
+"value": 0.48188,
+"valReal": "  495",
+"fillKey": "[373 - 629)" 
+},
+"DF": {
+ "year": 1998,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor":  626.9,
+"value": 0.48188,
+"valReal": "1,301",
+"fillKey": "[978 - 1,482)" 
+},
+"YUC": {
+ "year": 1998,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":    115,
+"value": 0.48188,
+"valReal": "  239",
+"fillKey": "[0 - 373)" 
+},
+"GRO": {
+ "year": 1998,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor":  215.4,
+"value": 0.48188,
+"valReal": "  447",
+"fillKey": "[373 - 629)" 
+},
+"NL": {
+ "year": 1998,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor":  262.2,
+"value": 0.48188,
+"valReal": "  544",
+"fillKey": "[373 - 629)" 
+},
+"CHIS": {
+ "year": 1998,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor":  264.7,
+"value": 0.48188,
+"valReal": "  549",
+"fillKey": "[373 - 629)" 
+},
+"QR": {
+ "year": 1998,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":   92.4,
+"value": 0.48188,
+"valReal": "  192",
+"fillKey": "[0 - 373)" 
+},
+"TLA": {
+ "year": 1998,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":   65.3,
+"value": 0.48188,
+"valReal": "  136",
+"fillKey": "[0 - 373)" 
+},
+"COA": {
+ "year": 1998,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor":  160.5,
+"value": 0.48188,
+"valReal": "  333",
+"fillKey": "[0 - 373)" 
+},
+"MEX": {
+ "year": 1998,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor":  864.6,
+"value": 0.48188,
+"valReal": "1,794",
+"fillKey": "[1,482 - 6,446]" 
+},
+"CHIH": {
+ "year": 1998,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor":  206.3,
+"value": 0.48188,
+"valReal": "  428",
+"fillKey": "[373 - 629)" 
+},
+"AGS": {
+ "year": 1998,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":   63.7,
+"value": 0.48188,
+"valReal": "  132",
+"fillKey": "[0 - 373)" 
+},
+"VER": {
+ "year": 1998,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor":  497.6,
+"value": 0.48188,
+"valReal": "1,033",
+"fillKey": "[978 - 1,482)" 
+},
+"SLP": {
+ "year": 1998,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  162.5,
+"value": 0.48188,
+"valReal": "  337",
+"fillKey": "[0 - 373)" 
+},
+"TAB": {
+ "year": 1998,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":  129.2,
+"value": 0.48188,
+"valReal": "  268",
+"fillKey": "[0 - 373)" 
+},
+"PUE": {
+ "year": 1998,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor":  341.5,
+"value": 0.48188,
+"valReal": "  709",
+"fillKey": "[629 - 978)" 
+},
+"NAY": {
+ "year": 1998,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":   66.2,
+"value": 0.48188,
+"valReal": "  137",
+"fillKey": "[0 - 373)" 
+},
+"SON": {
+ "year": 1998,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":    154,
+"value": 0.48188,
+"valReal": "  320",
+"fillKey": "[0 - 373)" 
+},
+"QROO": {
+ "year": 1998,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":     52,
+"value": 0.48188,
+"valReal": "  108",
+"fillKey": "[0 - 373)" 
+},
+"DUR": {
+ "year": 1998,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  105.7,
+"value": 0.48188,
+"valReal": "  219",
+"fillKey": "[0 - 373)" 
+} 
+},
+"legend": true,
+"id": "chart_1",
+"newData": {
+ "1998": {
+ "BCS": {
+ "year": 1998,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":   27.7,
+"value": 0.48188,
+"valReal": "   57",
+"fillKey": "[0 - 373)" 
+},
+"ZAC": {
+ "year": 1998,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":   98.7,
+"value": 0.48188,
+"valReal": "  205",
+"fillKey": "[0 - 373)" 
+},
+"CAM": {
+ "year": 1998,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":   47.5,
+"value": 0.48188,
+"valReal": "   99",
+"fillKey": "[0 - 373)" 
+},
+"COL": {
+ "year": 1998,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":     36,
+"value": 0.48188,
+"valReal": "   75",
+"fillKey": "[0 - 373)" 
+},
+"HGO": {
+ "year": 1998,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":    156,
+"value": 0.48188,
+"valReal": "  324",
+"fillKey": "[0 - 373)" 
+},
+"JAL": {
+ "year": 1998,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor":  442.5,
+"value": 0.48188,
+"valReal": "  918",
+"fillKey": "[629 - 978)" 
+},
+"MOR": {
+ "year": 1998,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  106.5,
+"value": 0.48188,
+"valReal": "  221",
+"fillKey": "[0 - 373)" 
+},
+"SIN": {
+ "year": 1998,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":  179.1,
+"value": 0.48188,
+"valReal": "  372",
+"fillKey": "[0 - 373)" 
+},
+"GTO": {
+ "year": 1998,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor":  325.4,
+"value": 0.48188,
+"valReal": "  675",
+"fillKey": "[629 - 978)" 
+},
+"TAM": {
+ "year": 1998,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor":  186.6,
+"value": 0.48188,
+"valReal": "  387",
+"fillKey": "[373 - 629)" 
+},
+"BC": {
+ "year": 1998,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor":    156,
+"value": 0.48188,
+"valReal": "  324",
+"fillKey": "[0 - 373)" 
+},
+"MICH": {
+ "year": 1998,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor":  285.9,
+"value": 0.48188,
+"valReal": "  593",
+"fillKey": "[373 - 629)" 
+},
+"OAX": {
+ "year": 1998,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor":  238.5,
+"value": 0.48188,
+"valReal": "  495",
+"fillKey": "[373 - 629)" 
+},
+"DF": {
+ "year": 1998,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor":  626.9,
+"value": 0.48188,
+"valReal": "1,301",
+"fillKey": "[978 - 1,482)" 
+},
+"YUC": {
+ "year": 1998,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":    115,
+"value": 0.48188,
+"valReal": "  239",
+"fillKey": "[0 - 373)" 
+},
+"GRO": {
+ "year": 1998,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor":  215.4,
+"value": 0.48188,
+"valReal": "  447",
+"fillKey": "[373 - 629)" 
+},
+"NL": {
+ "year": 1998,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor":  262.2,
+"value": 0.48188,
+"valReal": "  544",
+"fillKey": "[373 - 629)" 
+},
+"CHIS": {
+ "year": 1998,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor":  264.7,
+"value": 0.48188,
+"valReal": "  549",
+"fillKey": "[373 - 629)" 
+},
+"QR": {
+ "year": 1998,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":   92.4,
+"value": 0.48188,
+"valReal": "  192",
+"fillKey": "[0 - 373)" 
+},
+"TLA": {
+ "year": 1998,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":   65.3,
+"value": 0.48188,
+"valReal": "  136",
+"fillKey": "[0 - 373)" 
+},
+"COA": {
+ "year": 1998,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor":  160.5,
+"value": 0.48188,
+"valReal": "  333",
+"fillKey": "[0 - 373)" 
+},
+"MEX": {
+ "year": 1998,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor":  864.6,
+"value": 0.48188,
+"valReal": "1,794",
+"fillKey": "[1,482 - 6,446]" 
+},
+"CHIH": {
+ "year": 1998,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor":  206.3,
+"value": 0.48188,
+"valReal": "  428",
+"fillKey": "[373 - 629)" 
+},
+"AGS": {
+ "year": 1998,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":   63.7,
+"value": 0.48188,
+"valReal": "  132",
+"fillKey": "[0 - 373)" 
+},
+"VER": {
+ "year": 1998,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor":  497.6,
+"value": 0.48188,
+"valReal": "1,033",
+"fillKey": "[978 - 1,482)" 
+},
+"SLP": {
+ "year": 1998,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  162.5,
+"value": 0.48188,
+"valReal": "  337",
+"fillKey": "[0 - 373)" 
+},
+"TAB": {
+ "year": 1998,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":  129.2,
+"value": 0.48188,
+"valReal": "  268",
+"fillKey": "[0 - 373)" 
+},
+"PUE": {
+ "year": 1998,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor":  341.5,
+"value": 0.48188,
+"valReal": "  709",
+"fillKey": "[629 - 978)" 
+},
+"NAY": {
+ "year": 1998,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":   66.2,
+"value": 0.48188,
+"valReal": "  137",
+"fillKey": "[0 - 373)" 
+},
+"SON": {
+ "year": 1998,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":    154,
+"value": 0.48188,
+"valReal": "  320",
+"fillKey": "[0 - 373)" 
+},
+"QROO": {
+ "year": 1998,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":     52,
+"value": 0.48188,
+"valReal": "  108",
+"fillKey": "[0 - 373)" 
+},
+"DUR": {
+ "year": 1998,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  105.7,
+"value": 0.48188,
+"valReal": "  219",
+"fillKey": "[0 - 373)" 
+} 
+},
+"1999": {
+ "COL": {
+ "year": 1999,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":   77.3,
+"value": 0.56694,
+"valReal": "  136",
+"fillKey": "[0 - 373)" 
+},
+"QR": {
+ "year": 1999,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  198.1,
+"value": 0.56694,
+"valReal": "  349",
+"fillKey": "[0 - 373)" 
+},
+"SIN": {
+ "year": 1999,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":  384.3,
+"value": 0.56694,
+"valReal": "  678",
+"fillKey": "[629 - 978)" 
+},
+"AGS": {
+ "year": 1999,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  136.7,
+"value": 0.56694,
+"valReal": "  241",
+"fillKey": "[0 - 373)" 
+},
+"SLP": {
+ "year": 1999,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  348.7,
+"value": 0.56694,
+"valReal": "  615",
+"fillKey": "[373 - 629)" 
+},
+"TLA": {
+ "year": 1999,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":    140,
+"value": 0.56694,
+"valReal": "  247",
+"fillKey": "[0 - 373)" 
+},
+"GTO": {
+ "year": 1999,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor":  698.1,
+"value": 0.56694,
+"valReal": "1,231",
+"fillKey": "[978 - 1,482)" 
+},
+"VER": {
+ "year": 1999,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 1067.4,
+"value": 0.56694,
+"valReal": "1,883",
+"fillKey": "[1,482 - 6,446]" 
+},
+"QROO": {
+ "year": 1999,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  111.5,
+"value": 0.56694,
+"valReal": "  197",
+"fillKey": "[0 - 373)" 
+},
+"TAB": {
+ "year": 1999,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":  277.1,
+"value": 0.56694,
+"valReal": "  489",
+"fillKey": "[373 - 629)" 
+},
+"DUR": {
+ "year": 1999,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  226.8,
+"value": 0.56694,
+"valReal": "  400",
+"fillKey": "[373 - 629)" 
+},
+"DF": {
+ "year": 1999,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor":      0,
+"value": 0.56694,
+"valReal": "    0",
+"fillKey": "[0 - 373)" 
+},
+"JAL": {
+ "year": 1999,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor":  949.2,
+"value": 0.56694,
+"valReal": "1,674",
+"fillKey": "[1,482 - 6,446]" 
+},
+"SON": {
+ "year": 1999,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":  330.4,
+"value": 0.56694,
+"valReal": "  583",
+"fillKey": "[373 - 629)" 
+},
+"MOR": {
+ "year": 1999,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  228.6,
+"value": 0.56694,
+"valReal": "  403",
+"fillKey": "[373 - 629)" 
+},
+"HGO": {
+ "year": 1999,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":  334.7,
+"value": 0.56694,
+"valReal": "  590",
+"fillKey": "[373 - 629)" 
+},
+"TAM": {
+ "year": 1999,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor":  400.4,
+"value": 0.56694,
+"valReal": "  706",
+"fillKey": "[629 - 978)" 
+},
+"YUC": {
+ "year": 1999,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":  246.6,
+"value": 0.56694,
+"valReal": "  435",
+"fillKey": "[373 - 629)" 
+},
+"BC": {
+ "year": 1999,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor":  334.6,
+"value": 0.56694,
+"valReal": "  590",
+"fillKey": "[373 - 629)" 
+},
+"MICH": {
+ "year": 1999,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor":  613.2,
+"value": 0.56694,
+"valReal": "1,082",
+"fillKey": "[978 - 1,482)" 
+},
+"NL": {
+ "year": 1999,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor":  562.5,
+"value": 0.56694,
+"valReal": "  992",
+"fillKey": "[978 - 1,482)" 
+},
+"COA": {
+ "year": 1999,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor":  344.4,
+"value": 0.56694,
+"valReal": "  607",
+"fillKey": "[373 - 629)" 
+},
+"BCS": {
+ "year": 1999,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":   59.5,
+"value": 0.56694,
+"valReal": "  105",
+"fillKey": "[0 - 373)" 
+},
+"CHIH": {
+ "year": 1999,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor":  442.6,
+"value": 0.56694,
+"valReal": "  781",
+"fillKey": "[629 - 978)" 
+},
+"CAM": {
+ "year": 1999,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  101.8,
+"value": 0.56694,
+"valReal": "  180",
+"fillKey": "[0 - 373)" 
+},
+"MEX": {
+ "year": 1999,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 1854.9,
+"value": 0.56694,
+"valReal": "3,272",
+"fillKey": "[1,482 - 6,446]" 
+},
+"ZAC": {
+ "year": 1999,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  211.7,
+"value": 0.56694,
+"valReal": "  373",
+"fillKey": "[373 - 629)" 
+},
+"OAX": {
+ "year": 1999,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor":  511.6,
+"value": 0.56694,
+"valReal": "  902",
+"fillKey": "[629 - 978)" 
+},
+"PUE": {
+ "year": 1999,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor":  732.7,
+"value": 0.56694,
+"valReal": "1,292",
+"fillKey": "[978 - 1,482)" 
+},
+"CHIS": {
+ "year": 1999,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor":    568,
+"value": 0.56694,
+"valReal": "1,002",
+"fillKey": "[978 - 1,482)" 
+},
+"GRO": {
+ "year": 1999,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor":  462.1,
+"value": 0.56694,
+"valReal": "  815",
+"fillKey": "[629 - 978)" 
+},
+"NAY": {
+ "year": 1999,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":  142.1,
+"value": 0.56694,
+"valReal": "  251",
+"fillKey": "[0 - 373)" 
+} 
+},
+"2000": {
+ "SLP": {
+ "year": 2000,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  400.1,
+"value": 0.62827,
+"valReal": "  637",
+"fillKey": "[629 - 978)" 
+},
+"AGS": {
+ "year": 2000,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  156.9,
+"value": 0.62827,
+"valReal": "  250",
+"fillKey": "[0 - 373)" 
+},
+"BC": {
+ "year": 2000,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor":    384,
+"value": 0.62827,
+"valReal": "  611",
+"fillKey": "[373 - 629)" 
+},
+"MEX": {
+ "year": 2000,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 2128.7,
+"value": 0.62827,
+"valReal": "3,388",
+"fillKey": "[1,482 - 6,446]" 
+},
+"TAB": {
+ "year": 2000,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":  317.9,
+"value": 0.62827,
+"valReal": "  506",
+"fillKey": "[373 - 629)" 
+},
+"SIN": {
+ "year": 2000,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":    441,
+"value": 0.62827,
+"valReal": "  702",
+"fillKey": "[629 - 978)" 
+},
+"HGO": {
+ "year": 2000,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":  384.1,
+"value": 0.62827,
+"valReal": "  611",
+"fillKey": "[373 - 629)" 
+},
+"CHIS": {
+ "year": 2000,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor":  651.8,
+"value": 0.62827,
+"valReal": "1,037",
+"fillKey": "[978 - 1,482)" 
+},
+"YUC": {
+ "year": 2000,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":    283,
+"value": 0.62827,
+"valReal": "  450",
+"fillKey": "[373 - 629)" 
+},
+"QR": {
+ "year": 2000,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  227.3,
+"value": 0.62827,
+"valReal": "  362",
+"fillKey": "[0 - 373)" 
+},
+"NAY": {
+ "year": 2000,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":    163,
+"value": 0.62827,
+"valReal": "  259",
+"fillKey": "[0 - 373)" 
+},
+"SON": {
+ "year": 2000,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":  379.2,
+"value": 0.62827,
+"valReal": "  604",
+"fillKey": "[373 - 629)" 
+},
+"BCS": {
+ "year": 2000,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":   68.3,
+"value": 0.62827,
+"valReal": "  109",
+"fillKey": "[0 - 373)" 
+},
+"COA": {
+ "year": 2000,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor":  395.2,
+"value": 0.62827,
+"valReal": "  629",
+"fillKey": "[373 - 629)" 
+},
+"COL": {
+ "year": 2000,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":   88.7,
+"value": 0.62827,
+"valReal": "  141",
+"fillKey": "[0 - 373)" 
+},
+"TAM": {
+ "year": 2000,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor":  459.5,
+"value": 0.62827,
+"valReal": "  731",
+"fillKey": "[629 - 978)" 
+},
+"PUE": {
+ "year": 2000,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor":  840.8,
+"value": 0.62827,
+"valReal": "1,338",
+"fillKey": "[978 - 1,482)" 
+},
+"VER": {
+ "year": 2000,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 1224.9,
+"value": 0.62827,
+"valReal": "1,950",
+"fillKey": "[1,482 - 6,446]" 
+},
+"CHIH": {
+ "year": 2000,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor":  507.9,
+"value": 0.62827,
+"valReal": "  808",
+"fillKey": "[629 - 978)" 
+},
+"QROO": {
+ "year": 2000,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  127.9,
+"value": 0.62827,
+"valReal": "  204",
+"fillKey": "[0 - 373)" 
+},
+"DF": {
+ "year": 2000,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor":      0,
+"value": 0.62827,
+"valReal": "    0",
+"fillKey": "[0 - 373)" 
+},
+"DUR": {
+ "year": 2000,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  260.3,
+"value": 0.62827,
+"valReal": "  414",
+"fillKey": "[373 - 629)" 
+},
+"GTO": {
+ "year": 2000,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor":  801.2,
+"value": 0.62827,
+"valReal": "1,275",
+"fillKey": "[978 - 1,482)" 
+},
+"ZAC": {
+ "year": 2000,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":    243,
+"value": 0.62827,
+"valReal": "  387",
+"fillKey": "[373 - 629)" 
+},
+"CAM": {
+ "year": 2000,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  116.8,
+"value": 0.62827,
+"valReal": "  186",
+"fillKey": "[0 - 373)" 
+},
+"GRO": {
+ "year": 2000,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor":  530.3,
+"value": 0.62827,
+"valReal": "  844",
+"fillKey": "[629 - 978)" 
+},
+"JAL": {
+ "year": 2000,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor": 1089.3,
+"value": 0.62827,
+"valReal": "1,734",
+"fillKey": "[1,482 - 6,446]" 
+},
+"TLA": {
+ "year": 2000,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  160.7,
+"value": 0.62827,
+"valReal": "  256",
+"fillKey": "[0 - 373)" 
+},
+"MICH": {
+ "year": 2000,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor":  703.7,
+"value": 0.62827,
+"valReal": "1,120",
+"fillKey": "[978 - 1,482)" 
+},
+"MOR": {
+ "year": 2000,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  262.3,
+"value": 0.62827,
+"valReal": "  417",
+"fillKey": "[373 - 629)" 
+},
+"NL": {
+ "year": 2000,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor":  645.5,
+"value": 0.62827,
+"valReal": "1,027",
+"fillKey": "[978 - 1,482)" 
+},
+"OAX": {
+ "year": 2000,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor":    587,
+"value": 0.62827,
+"valReal": "  934",
+"fillKey": "[629 - 978)" 
+} 
+},
+"2001": {
+ "SLP": {
+ "year": 2001,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  463.6,
+"value": 0.66203,
+"valReal": "  700",
+"fillKey": "[629 - 978)" 
+},
+"TLA": {
+ "year": 2001,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  194.2,
+"value": 0.66203,
+"valReal": "  293",
+"fillKey": "[0 - 373)" 
+},
+"SIN": {
+ "year": 2001,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":  511.7,
+"value": 0.66203,
+"valReal": "  773",
+"fillKey": "[629 - 978)" 
+},
+"TAM": {
+ "year": 2001,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor":  554.6,
+"value": 0.66203,
+"valReal": "  838",
+"fillKey": "[629 - 978)" 
+},
+"DUR": {
+ "year": 2001,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  291.9,
+"value": 0.66203,
+"valReal": "  441",
+"fillKey": "[373 - 629)" 
+},
+"YUC": {
+ "year": 2001,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":  334.2,
+"value": 0.66203,
+"valReal": "  505",
+"fillKey": "[373 - 629)" 
+},
+"GTO": {
+ "year": 2001,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor":  940.1,
+"value": 0.66203,
+"valReal": "1,420",
+"fillKey": "[978 - 1,482)" 
+},
+"COL": {
+ "year": 2001,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":  109.1,
+"value": 0.66203,
+"valReal": "  165",
+"fillKey": "[0 - 373)" 
+},
+"MICH": {
+ "year": 2001,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor":  803.3,
+"value": 0.66203,
+"valReal": "1,213",
+"fillKey": "[978 - 1,482)" 
+},
+"PUE": {
+ "year": 2001,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 1023.6,
+"value": 0.66203,
+"valReal": "1,546",
+"fillKey": "[1,482 - 6,446]" 
+},
+"JAL": {
+ "year": 2001,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor": 1276.1,
+"value": 0.66203,
+"valReal": "1,928",
+"fillKey": "[1,482 - 6,446]" 
+},
+"CHIH": {
+ "year": 2001,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor":  615.3,
+"value": 0.66203,
+"valReal": "  929",
+"fillKey": "[629 - 978)" 
+},
+"BCS": {
+ "year": 2001,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":   85.5,
+"value": 0.66203,
+"valReal": "  129",
+"fillKey": "[0 - 373)" 
+},
+"QROO": {
+ "year": 2001,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  176.4,
+"value": 0.66203,
+"valReal": "  266",
+"fillKey": "[0 - 373)" 
+},
+"VER": {
+ "year": 2001,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 1393.1,
+"value": 0.66203,
+"valReal": "2,104",
+"fillKey": "[1,482 - 6,446]" 
+},
+"BC": {
+ "year": 2001,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor":  502.2,
+"value": 0.66203,
+"valReal": "  759",
+"fillKey": "[629 - 978)" 
+},
+"NAY": {
+ "year": 2001,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":  185.7,
+"value": 0.66203,
+"valReal": "  281",
+"fillKey": "[0 - 373)" 
+},
+"MOR": {
+ "year": 2001,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  313.5,
+"value": 0.66203,
+"valReal": "  474",
+"fillKey": "[373 - 629)" 
+},
+"ZAC": {
+ "year": 2001,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  272.8,
+"value": 0.66203,
+"valReal": "  412",
+"fillKey": "[373 - 629)" 
+},
+"DF": {
+ "year": 2001,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor": 1618.9,
+"value": 0.66203,
+"valReal": "2,445",
+"fillKey": "[1,482 - 6,446]" 
+},
+"COA": {
+ "year": 2001,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor":  463.5,
+"value": 0.66203,
+"valReal": "  700",
+"fillKey": "[629 - 978)" 
+},
+"AGS": {
+ "year": 2001,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  190.5,
+"value": 0.66203,
+"valReal": "  288",
+"fillKey": "[0 - 373)" 
+},
+"QR": {
+ "year": 2001,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":    283,
+"value": 0.66203,
+"valReal": "  427",
+"fillKey": "[373 - 629)" 
+},
+"MEX": {
+ "year": 2001,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 2641.2,
+"value": 0.66203,
+"valReal": "3,990",
+"fillKey": "[1,482 - 6,446]" 
+},
+"OAX": {
+ "year": 2001,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor":  692.9,
+"value": 0.66203,
+"valReal": "1,047",
+"fillKey": "[978 - 1,482)" 
+},
+"GRO": {
+ "year": 2001,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor":  620.6,
+"value": 0.66203,
+"valReal": "  937",
+"fillKey": "[629 - 978)" 
+},
+"SON": {
+ "year": 2001,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":  446.8,
+"value": 0.66203,
+"valReal": "  675",
+"fillKey": "[629 - 978)" 
+},
+"NL": {
+ "year": 2001,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor":  772.4,
+"value": 0.66203,
+"valReal": "1,167",
+"fillKey": "[978 - 1,482)" 
+},
+"CAM": {
+ "year": 2001,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  139.2,
+"value": 0.66203,
+"valReal": "  210",
+"fillKey": "[0 - 373)" 
+},
+"TAB": {
+ "year": 2001,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":  381.4,
+"value": 0.66203,
+"valReal": "  576",
+"fillKey": "[373 - 629)" 
+},
+"HGO": {
+ "year": 2001,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":  450.4,
+"value": 0.66203,
+"valReal": "  680",
+"fillKey": "[629 - 978)" 
+},
+"CHIS": {
+ "year": 2001,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor":  791.4,
+"value": 0.66203,
+"valReal": "1,195",
+"fillKey": "[978 - 1,482)" 
+} 
+},
+"2002": {
+ "NAY": {
+ "year": 2002,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":    212,
+"value": 0.69926,
+"valReal": "  303",
+"fillKey": "[0 - 373)" 
+},
+"BCS": {
+ "year": 2002,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":   97.7,
+"value": 0.69926,
+"valReal": "  140",
+"fillKey": "[0 - 373)" 
+},
+"PUE": {
+ "year": 2002,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 1169.6,
+"value": 0.69926,
+"valReal": "1,673",
+"fillKey": "[1,482 - 6,446]" 
+},
+"SLP": {
+ "year": 2002,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  529.8,
+"value": 0.69926,
+"valReal": "  758",
+"fillKey": "[629 - 978)" 
+},
+"ZAC": {
+ "year": 2002,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  311.9,
+"value": 0.69926,
+"valReal": "  446",
+"fillKey": "[373 - 629)" 
+},
+"TAM": {
+ "year": 2002,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor":  634.3,
+"value": 0.69926,
+"valReal": "  907",
+"fillKey": "[629 - 978)" 
+},
+"DUR": {
+ "year": 2002,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  333.7,
+"value": 0.69926,
+"valReal": "  477",
+"fillKey": "[373 - 629)" 
+},
+"TLA": {
+ "year": 2002,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  221.8,
+"value": 0.69926,
+"valReal": "  317",
+"fillKey": "[0 - 373)" 
+},
+"YUC": {
+ "year": 2002,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":    382,
+"value": 0.69926,
+"valReal": "  546",
+"fillKey": "[373 - 629)" 
+},
+"MEX": {
+ "year": 2002,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 3017.4,
+"value": 0.69926,
+"valReal": "4,315",
+"fillKey": "[1,482 - 6,446]" 
+},
+"OAX": {
+ "year": 2002,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor":  792.3,
+"value": 0.69926,
+"valReal": "1,133",
+"fillKey": "[978 - 1,482)" 
+},
+"CHIS": {
+ "year": 2002,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor":  903.3,
+"value": 0.69926,
+"valReal": "1,292",
+"fillKey": "[978 - 1,482)" 
+},
+"BC": {
+ "year": 2002,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor":  573.1,
+"value": 0.69926,
+"valReal": "  820",
+"fillKey": "[629 - 978)" 
+},
+"MOR": {
+ "year": 2002,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  358.3,
+"value": 0.69926,
+"valReal": "  512",
+"fillKey": "[373 - 629)" 
+},
+"QR": {
+ "year": 2002,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  323.5,
+"value": 0.69926,
+"valReal": "  463",
+"fillKey": "[373 - 629)" 
+},
+"COL": {
+ "year": 2002,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":    125,
+"value": 0.69926,
+"valReal": "  179",
+"fillKey": "[0 - 373)" 
+},
+"MICH": {
+ "year": 2002,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor":  918.3,
+"value": 0.69926,
+"valReal": "1,313",
+"fillKey": "[978 - 1,482)" 
+},
+"TAB": {
+ "year": 2002,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":  435.9,
+"value": 0.69926,
+"valReal": "  623",
+"fillKey": "[373 - 629)" 
+},
+"SIN": {
+ "year": 2002,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":  584.5,
+"value": 0.69926,
+"valReal": "  836",
+"fillKey": "[629 - 978)" 
+},
+"JAL": {
+ "year": 2002,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor": 1456.5,
+"value": 0.69926,
+"valReal": "2,083",
+"fillKey": "[1,482 - 6,446]" 
+},
+"CHIH": {
+ "year": 2002,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor":  703.4,
+"value": 0.69926,
+"valReal": "1,006",
+"fillKey": "[978 - 1,482)" 
+},
+"GTO": {
+ "year": 2002,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor": 1074.3,
+"value": 0.69926,
+"valReal": "1,536",
+"fillKey": "[1,482 - 6,446]" 
+},
+"CAM": {
+ "year": 2002,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  159.1,
+"value": 0.69926,
+"valReal": "  228",
+"fillKey": "[0 - 373)" 
+},
+"QROO": {
+ "year": 2002,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  201.6,
+"value": 0.69926,
+"valReal": "  288",
+"fillKey": "[0 - 373)" 
+},
+"GRO": {
+ "year": 2002,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor":  709.5,
+"value": 0.69926,
+"valReal": "1,015",
+"fillKey": "[978 - 1,482)" 
+},
+"HGO": {
+ "year": 2002,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":  515.1,
+"value": 0.69926,
+"valReal": "  737",
+"fillKey": "[629 - 978)" 
+},
+"NL": {
+ "year": 2002,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor":  883.4,
+"value": 0.69926,
+"valReal": "1,263",
+"fillKey": "[978 - 1,482)" 
+},
+"DF": {
+ "year": 2002,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor": 1849.9,
+"value": 0.69926,
+"valReal": "2,646",
+"fillKey": "[1,482 - 6,446]" 
+},
+"COA": {
+ "year": 2002,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor":  529.4,
+"value": 0.69926,
+"valReal": "  757",
+"fillKey": "[629 - 978)" 
+},
+"AGS": {
+ "year": 2002,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  217.5,
+"value": 0.69926,
+"valReal": "  311",
+"fillKey": "[0 - 373)" 
+},
+"VER": {
+ "year": 2002,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 1591.8,
+"value": 0.69926,
+"valReal": "2,276",
+"fillKey": "[1,482 - 6,446]" 
+},
+"SON": {
+ "year": 2002,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":  510.8,
+"value": 0.69926,
+"valReal": "  730",
+"fillKey": "[629 - 978)" 
+} 
+},
+"2003": {
+ "GTO": {
+ "year": 2003,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor": 1101.4,
+"value": 0.74097,
+"valReal": "1,486",
+"fillKey": "[1,482 - 6,446]" 
+},
+"SIN": {
+ "year": 2003,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":  599.2,
+"value": 0.74097,
+"valReal": "  809",
+"fillKey": "[629 - 978)" 
+},
+"NAY": {
+ "year": 2003,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":  217.3,
+"value": 0.74097,
+"valReal": "  293",
+"fillKey": "[0 - 373)" 
+},
+"CHIS": {
+ "year": 2003,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor":  926.1,
+"value": 0.74097,
+"valReal": "1,250",
+"fillKey": "[978 - 1,482)" 
+},
+"MOR": {
+ "year": 2003,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  367.3,
+"value": 0.74097,
+"valReal": "  496",
+"fillKey": "[373 - 629)" 
+},
+"SLP": {
+ "year": 2003,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  543.1,
+"value": 0.74097,
+"valReal": "  733",
+"fillKey": "[629 - 978)" 
+},
+"ZAC": {
+ "year": 2003,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  319.7,
+"value": 0.74097,
+"valReal": "  431",
+"fillKey": "[373 - 629)" 
+},
+"BC": {
+ "year": 2003,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor":  587.5,
+"value": 0.74097,
+"valReal": "  793",
+"fillKey": "[629 - 978)" 
+},
+"YUC": {
+ "year": 2003,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":  391.7,
+"value": 0.74097,
+"valReal": "  529",
+"fillKey": "[373 - 629)" 
+},
+"PUE": {
+ "year": 2003,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 1199.1,
+"value": 0.74097,
+"valReal": "1,618",
+"fillKey": "[1,482 - 6,446]" 
+},
+"BCS": {
+ "year": 2003,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":  100.2,
+"value": 0.74097,
+"valReal": "  135",
+"fillKey": "[0 - 373)" 
+},
+"QR": {
+ "year": 2003,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  331.7,
+"value": 0.74097,
+"valReal": "  448",
+"fillKey": "[373 - 629)" 
+},
+"COL": {
+ "year": 2003,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":  128.2,
+"value": 0.74097,
+"valReal": "  173",
+"fillKey": "[0 - 373)" 
+},
+"DF": {
+ "year": 2003,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor": 1896.5,
+"value": 0.74097,
+"valReal": "2,559",
+"fillKey": "[1,482 - 6,446]" 
+},
+"DUR": {
+ "year": 2003,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  342.2,
+"value": 0.74097,
+"valReal": "  462",
+"fillKey": "[373 - 629)" 
+},
+"JAL": {
+ "year": 2003,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor": 1493.2,
+"value": 0.74097,
+"valReal": "2,015",
+"fillKey": "[1,482 - 6,446]" 
+},
+"GRO": {
+ "year": 2003,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor":  727.4,
+"value": 0.74097,
+"valReal": "  982",
+"fillKey": "[978 - 1,482)" 
+},
+"CAM": {
+ "year": 2003,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  163.1,
+"value": 0.74097,
+"valReal": "  220",
+"fillKey": "[0 - 373)" 
+},
+"COA": {
+ "year": 2003,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor":  542.8,
+"value": 0.74097,
+"valReal": "  733",
+"fillKey": "[629 - 978)" 
+},
+"CHIH": {
+ "year": 2003,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor":  721.1,
+"value": 0.74097,
+"valReal": "  973",
+"fillKey": "[629 - 978)" 
+},
+"TAB": {
+ "year": 2003,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":  446.8,
+"value": 0.74097,
+"valReal": "  603",
+"fillKey": "[373 - 629)" 
+},
+"TAM": {
+ "year": 2003,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor":  650.3,
+"value": 0.74097,
+"valReal": "  878",
+"fillKey": "[629 - 978)" 
+},
+"MEX": {
+ "year": 2003,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 3093.4,
+"value": 0.74097,
+"valReal": "4,175",
+"fillKey": "[1,482 - 6,446]" 
+},
+"OAX": {
+ "year": 2003,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor":  812.2,
+"value": 0.74097,
+"valReal": "1,096",
+"fillKey": "[978 - 1,482)" 
+},
+"MICH": {
+ "year": 2003,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor":  941.4,
+"value": 0.74097,
+"valReal": "1,270",
+"fillKey": "[978 - 1,482)" 
+},
+"NL": {
+ "year": 2003,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor":  905.6,
+"value": 0.74097,
+"valReal": "1,222",
+"fillKey": "[978 - 1,482)" 
+},
+"QROO": {
+ "year": 2003,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  206.7,
+"value": 0.74097,
+"valReal": "  279",
+"fillKey": "[0 - 373)" 
+},
+"VER": {
+ "year": 2003,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 1631.9,
+"value": 0.74097,
+"valReal": "2,202",
+"fillKey": "[1,482 - 6,446]" 
+},
+"HGO": {
+ "year": 2003,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":  528.1,
+"value": 0.74097,
+"valReal": "  713",
+"fillKey": "[629 - 978)" 
+},
+"AGS": {
+ "year": 2003,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":    223,
+"value": 0.74097,
+"valReal": "  301",
+"fillKey": "[0 - 373)" 
+},
+"TLA": {
+ "year": 2003,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  227.4,
+"value": 0.74097,
+"valReal": "  307",
+"fillKey": "[0 - 373)" 
+},
+"SON": {
+ "year": 2003,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":  523.6,
+"value": 0.74097,
+"valReal": "  707",
+"fillKey": "[629 - 978)" 
+} 
+},
+"2004": {
+ "ZAC": {
+ "year": 2004,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  319.3,
+"value": 0.80255,
+"valReal": "  398",
+"fillKey": "[373 - 629)" 
+},
+"SLP": {
+ "year": 2004,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  555.7,
+"value": 0.80255,
+"valReal": "  692",
+"fillKey": "[629 - 978)" 
+},
+"CHIS": {
+ "year": 2004,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor":  984.8,
+"value": 0.80255,
+"valReal": "1,227",
+"fillKey": "[978 - 1,482)" 
+},
+"JAL": {
+ "year": 2004,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor": 1542.2,
+"value": 0.80255,
+"valReal": "1,922",
+"fillKey": "[1,482 - 6,446]" 
+},
+"NAY": {
+ "year": 2004,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":  219.1,
+"value": 0.80255,
+"valReal": "  273",
+"fillKey": "[0 - 373)" 
+},
+"BC": {
+ "year": 2004,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor":  681.2,
+"value": 0.80255,
+"valReal": "  849",
+"fillKey": "[629 - 978)" 
+},
+"MOR": {
+ "year": 2004,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  390.2,
+"value": 0.80255,
+"valReal": "  486",
+"fillKey": "[373 - 629)" 
+},
+"GTO": {
+ "year": 2004,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor": 1138.5,
+"value": 0.80255,
+"valReal": "1,419",
+"fillKey": "[978 - 1,482)" 
+},
+"CAM": {
+ "year": 2004,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  170.6,
+"value": 0.80255,
+"valReal": "  213",
+"fillKey": "[0 - 373)" 
+},
+"NL": {
+ "year": 2004,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor":  952.4,
+"value": 0.80255,
+"valReal": "1,187",
+"fillKey": "[978 - 1,482)" 
+},
+"YUC": {
+ "year": 2004,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":  406.6,
+"value": 0.80255,
+"valReal": "  507",
+"fillKey": "[373 - 629)" 
+},
+"BCS": {
+ "year": 2004,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":  108.8,
+"value": 0.80255,
+"valReal": "  136",
+"fillKey": "[0 - 373)" 
+},
+"TAB": {
+ "year": 2004,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":  469.3,
+"value": 0.80255,
+"valReal": "  585",
+"fillKey": "[373 - 629)" 
+},
+"HGO": {
+ "year": 2004,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":  545.6,
+"value": 0.80255,
+"valReal": "  680",
+"fillKey": "[629 - 978)" 
+},
+"DUR": {
+ "year": 2004,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  342.2,
+"value": 0.80255,
+"valReal": "  426",
+"fillKey": "[373 - 629)" 
+},
+"QROO": {
+ "year": 2004,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  242.3,
+"value": 0.80255,
+"valReal": "  302",
+"fillKey": "[0 - 373)" 
+},
+"COL": {
+ "year": 2004,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":  140.7,
+"value": 0.80255,
+"valReal": "  175",
+"fillKey": "[0 - 373)" 
+},
+"TLA": {
+ "year": 2004,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  240.1,
+"value": 0.80255,
+"valReal": "  299",
+"fillKey": "[0 - 373)" 
+},
+"QR": {
+ "year": 2004,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  359.2,
+"value": 0.80255,
+"valReal": "  448",
+"fillKey": "[373 - 629)" 
+},
+"SIN": {
+ "year": 2004,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":  613.1,
+"value": 0.80255,
+"valReal": "  764",
+"fillKey": "[629 - 978)" 
+},
+"TAM": {
+ "year": 2004,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor":  687.6,
+"value": 0.80255,
+"valReal": "  857",
+"fillKey": "[629 - 978)" 
+},
+"MICH": {
+ "year": 2004,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor":  954.3,
+"value": 0.80255,
+"valReal": "1,189",
+"fillKey": "[978 - 1,482)" 
+},
+"COA": {
+ "year": 2004,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor":  561.4,
+"value": 0.80255,
+"valReal": "  700",
+"fillKey": "[629 - 978)" 
+},
+"VER": {
+ "year": 2004,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 1646.2,
+"value": 0.80255,
+"valReal": "2,051",
+"fillKey": "[1,482 - 6,446]" 
+},
+"OAX": {
+ "year": 2004,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor":  842.5,
+"value": 0.80255,
+"valReal": "1,050",
+"fillKey": "[978 - 1,482)" 
+},
+"PUE": {
+ "year": 2004,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 1288.1,
+"value": 0.80255,
+"valReal": "1,605",
+"fillKey": "[1,482 - 6,446]" 
+},
+"AGS": {
+ "year": 2004,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  236.4,
+"value": 0.80255,
+"valReal": "  295",
+"fillKey": "[0 - 373)" 
+},
+"SON": {
+ "year": 2004,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":  542.8,
+"value": 0.80255,
+"valReal": "  676",
+"fillKey": "[629 - 978)" 
+},
+"MEX": {
+ "year": 2004,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 3396.5,
+"value": 0.80255,
+"valReal": "4,232",
+"fillKey": "[1,482 - 6,446]" 
+},
+"DF": {
+ "year": 2004,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor": 1996.6,
+"value": 0.80255,
+"valReal": "2,488",
+"fillKey": "[1,482 - 6,446]" 
+},
+"GRO": {
+ "year": 2004,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor":  751.5,
+"value": 0.80255,
+"valReal": "  936",
+"fillKey": "[629 - 978)" 
+},
+"CHIH": {
+ "year": 2004,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor":  771.8,
+"value": 0.80255,
+"valReal": "  962",
+"fillKey": "[629 - 978)" 
+} 
+},
+"2005": {
+ "SIN": {
+ "year": 2005,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":  689.9,
+"value": 0.84596,
+"valReal": "  816",
+"fillKey": "[629 - 978)" 
+},
+"COA": {
+ "year": 2005,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor":  633.3,
+"value": 0.84596,
+"valReal": "  749",
+"fillKey": "[629 - 978)" 
+},
+"DF": {
+ "year": 2005,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor": 2262.2,
+"value": 0.84596,
+"valReal": "2,674",
+"fillKey": "[1,482 - 6,446]" 
+},
+"SLP": {
+ "year": 2005,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  625.2,
+"value": 0.84596,
+"valReal": "  739",
+"fillKey": "[629 - 978)" 
+},
+"QROO": {
+ "year": 2005,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  283.9,
+"value": 0.84596,
+"valReal": "  336",
+"fillKey": "[0 - 373)" 
+},
+"SON": {
+ "year": 2005,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":    613,
+"value": 0.84596,
+"valReal": "  725",
+"fillKey": "[629 - 978)" 
+},
+"AGS": {
+ "year": 2005,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  268.8,
+"value": 0.84596,
+"valReal": "  318",
+"fillKey": "[0 - 373)" 
+},
+"PUE": {
+ "year": 2005,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 1465.9,
+"value": 0.84596,
+"valReal": "1,733",
+"fillKey": "[1,482 - 6,446]" 
+},
+"CHIS": {
+ "year": 2005,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor": 1119.7,
+"value": 0.84596,
+"valReal": "1,324",
+"fillKey": "[978 - 1,482)" 
+},
+"DUR": {
+ "year": 2005,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":    382,
+"value": 0.84596,
+"valReal": "  452",
+"fillKey": "[373 - 629)" 
+},
+"CAM": {
+ "year": 2005,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  193.2,
+"value": 0.84596,
+"valReal": "  228",
+"fillKey": "[0 - 373)" 
+},
+"BCS": {
+ "year": 2005,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":  124.6,
+"value": 0.84596,
+"valReal": "  147",
+"fillKey": "[0 - 373)" 
+},
+"TAB": {
+ "year": 2005,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":  532.3,
+"value": 0.84596,
+"valReal": "  629",
+"fillKey": "[629 - 978)" 
+},
+"MICH": {
+ "year": 2005,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor": 1069.9,
+"value": 0.84596,
+"valReal": "1,265",
+"fillKey": "[978 - 1,482)" 
+},
+"JAL": {
+ "year": 2005,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor": 1738.9,
+"value": 0.84596,
+"valReal": "2,056",
+"fillKey": "[1,482 - 6,446]" 
+},
+"BC": {
+ "year": 2005,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor":    788,
+"value": 0.84596,
+"valReal": "  931",
+"fillKey": "[629 - 978)" 
+},
+"MEX": {
+ "year": 2005,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 3882.3,
+"value": 0.84596,
+"valReal": "4,589",
+"fillKey": "[1,482 - 6,446]" 
+},
+"VER": {
+ "year": 2005,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 1843.9,
+"value": 0.84596,
+"valReal": "2,180",
+"fillKey": "[1,482 - 6,446]" 
+},
+"MOR": {
+ "year": 2005,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  442.2,
+"value": 0.84596,
+"valReal": "  523",
+"fillKey": "[373 - 629)" 
+},
+"HGO": {
+ "year": 2005,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":  615.7,
+"value": 0.84596,
+"valReal": "  728",
+"fillKey": "[629 - 978)" 
+},
+"NAY": {
+ "year": 2005,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":  245.5,
+"value": 0.84596,
+"valReal": "  290",
+"fillKey": "[0 - 373)" 
+},
+"TLA": {
+ "year": 2005,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  272.7,
+"value": 0.84596,
+"valReal": "  322",
+"fillKey": "[0 - 373)" 
+},
+"ZAC": {
+ "year": 2005,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  356.5,
+"value": 0.84596,
+"valReal": "  421",
+"fillKey": "[373 - 629)" 
+},
+"TAM": {
+ "year": 2005,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor":  781.1,
+"value": 0.84596,
+"valReal": "  923",
+"fillKey": "[629 - 978)" 
+},
+"YUC": {
+ "year": 2005,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":  459.6,
+"value": 0.84596,
+"valReal": "  543",
+"fillKey": "[373 - 629)" 
+},
+"COL": {
+ "year": 2005,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":  160.6,
+"value": 0.84596,
+"valReal": "  190",
+"fillKey": "[0 - 373)" 
+},
+"CHIH": {
+ "year": 2005,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor":  877.4,
+"value": 0.84596,
+"valReal": "1,037",
+"fillKey": "[978 - 1,482)" 
+},
+"QR": {
+ "year": 2005,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  410.9,
+"value": 0.84596,
+"valReal": "  486",
+"fillKey": "[373 - 629)" 
+},
+"GRO": {
+ "year": 2005,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor":  847.5,
+"value": 0.84596,
+"valReal": "1,002",
+"fillKey": "[978 - 1,482)" 
+},
+"GTO": {
+ "year": 2005,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor": 1284.6,
+"value": 0.84596,
+"valReal": "1,519",
+"fillKey": "[1,482 - 6,446]" 
+},
+"NL": {
+ "year": 2005,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor": 1079.7,
+"value": 0.84596,
+"valReal": "1,276",
+"fillKey": "[978 - 1,482)" 
+},
+"OAX": {
+ "year": 2005,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor":    952,
+"value": 0.84596,
+"valReal": "1,125",
+"fillKey": "[978 - 1,482)" 
+} 
+},
+"2006": {
+ "SON": {
+ "year": 2006,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":  653.4,
+"value": 0.89926,
+"valReal": "  727",
+"fillKey": "[629 - 978)" 
+},
+"OAX": {
+ "year": 2006,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor": 1015.3,
+"value": 0.89926,
+"valReal": "1,129",
+"fillKey": "[978 - 1,482)" 
+},
+"BCS": {
+ "year": 2006,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":  134.7,
+"value": 0.89926,
+"valReal": "  150",
+"fillKey": "[0 - 373)" 
+},
+"VER": {
+ "year": 2006,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor":   1949,
+"value": 0.89926,
+"valReal": "2,167",
+"fillKey": "[1,482 - 6,446]" 
+},
+"BC": {
+ "year": 2006,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor":  860.3,
+"value": 0.89926,
+"valReal": "  957",
+"fillKey": "[629 - 978)" 
+},
+"TLA": {
+ "year": 2006,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  292.3,
+"value": 0.89926,
+"valReal": "  325",
+"fillKey": "[0 - 373)" 
+},
+"DF": {
+ "year": 2006,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor":   2419,
+"value": 0.89926,
+"valReal": "2,690",
+"fillKey": "[1,482 - 6,446]" 
+},
+"SIN": {
+ "year": 2006,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":  732.5,
+"value": 0.89926,
+"valReal": "  815",
+"fillKey": "[629 - 978)" 
+},
+"NAY": {
+ "year": 2006,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":  259.5,
+"value": 0.89926,
+"valReal": "  289",
+"fillKey": "[0 - 373)" 
+},
+"GTO": {
+ "year": 2006,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor": 1367.8,
+"value": 0.89926,
+"valReal": "1,521",
+"fillKey": "[1,482 - 6,446]" 
+},
+"COA": {
+ "year": 2006,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor":  674.1,
+"value": 0.89926,
+"valReal": "  750",
+"fillKey": "[629 - 978)" 
+},
+"CHIH": {
+ "year": 2006,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor":  941.3,
+"value": 0.89926,
+"valReal": "1,047",
+"fillKey": "[978 - 1,482)" 
+},
+"AGS": {
+ "year": 2006,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  288.5,
+"value": 0.89926,
+"valReal": "  321",
+"fillKey": "[0 - 373)" 
+},
+"COL": {
+ "year": 2006,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":  172.9,
+"value": 0.89926,
+"valReal": "  192",
+"fillKey": "[0 - 373)" 
+},
+"MICH": {
+ "year": 2006,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor":   1132,
+"value": 0.89926,
+"valReal": "1,259",
+"fillKey": "[978 - 1,482)" 
+},
+"JAL": {
+ "year": 2006,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor": 1850.2,
+"value": 0.89926,
+"valReal": "2,057",
+"fillKey": "[1,482 - 6,446]" 
+},
+"MOR": {
+ "year": 2006,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  472.8,
+"value": 0.89926,
+"valReal": "  526",
+"fillKey": "[373 - 629)" 
+},
+"SLP": {
+ "year": 2006,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  663.7,
+"value": 0.89926,
+"valReal": "  738",
+"fillKey": "[629 - 978)" 
+},
+"NL": {
+ "year": 2006,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor": 1155.1,
+"value": 0.89926,
+"valReal": "1,285",
+"fillKey": "[978 - 1,482)" 
+},
+"CAM": {
+ "year": 2006,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  206.5,
+"value": 0.89926,
+"valReal": "  230",
+"fillKey": "[0 - 373)" 
+},
+"PUE": {
+ "year": 2006,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 1574.3,
+"value": 0.89926,
+"valReal": "1,751",
+"fillKey": "[1,482 - 6,446]" 
+},
+"TAM": {
+ "year": 2006,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor":  837.4,
+"value": 0.89926,
+"valReal": "  931",
+"fillKey": "[629 - 978)" 
+},
+"MEX": {
+ "year": 2006,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 4187.6,
+"value": 0.89926,
+"valReal": "4,657",
+"fillKey": "[1,482 - 6,446]" 
+},
+"QR": {
+ "year": 2006,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  443.7,
+"value": 0.89926,
+"valReal": "  493",
+"fillKey": "[373 - 629)" 
+},
+"YUC": {
+ "year": 2006,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":  490.1,
+"value": 0.89926,
+"valReal": "  545",
+"fillKey": "[373 - 629)" 
+},
+"GRO": {
+ "year": 2006,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor":  901.9,
+"value": 0.89926,
+"valReal": "1,003",
+"fillKey": "[978 - 1,482)" 
+},
+"ZAC": {
+ "year": 2006,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  375.8,
+"value": 0.89926,
+"valReal": "  418",
+"fillKey": "[373 - 629)" 
+},
+"CHIS": {
+ "year": 2006,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor": 1201.5,
+"value": 0.89926,
+"valReal": "1,336",
+"fillKey": "[978 - 1,482)" 
+},
+"TAB": {
+ "year": 2006,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":  569.7,
+"value": 0.89926,
+"valReal": "  634",
+"fillKey": "[629 - 978)" 
+},
+"HGO": {
+ "year": 2006,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":  655.6,
+"value": 0.89926,
+"valReal": "  729",
+"fillKey": "[629 - 978)" 
+},
+"DUR": {
+ "year": 2006,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  402.5,
+"value": 0.89926,
+"valReal": "  448",
+"fillKey": "[373 - 629)" 
+},
+"QROO": {
+ "year": 2006,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  313.9,
+"value": 0.89926,
+"valReal": "  349",
+"fillKey": "[0 - 373)" 
+} 
+},
+"2007": {
+ "BCS": {
+ "year": 2007,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":  163.1,
+"value": 0.94339,
+"valReal": "  173",
+"fillKey": "[0 - 373)" 
+},
+"SIN": {
+ "year": 2007,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":    824,
+"value": 0.94339,
+"valReal": "  873",
+"fillKey": "[629 - 978)" 
+},
+"CAM": {
+ "year": 2007,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  239.8,
+"value": 0.94339,
+"valReal": "  254",
+"fillKey": "[0 - 373)" 
+},
+"SON": {
+ "year": 2007,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":  760.9,
+"value": 0.94339,
+"valReal": "  807",
+"fillKey": "[629 - 978)" 
+},
+"COA": {
+ "year": 2007,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor":  794.1,
+"value": 0.94339,
+"valReal": "  842",
+"fillKey": "[629 - 978)" 
+},
+"TAB": {
+ "year": 2007,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":    630,
+"value": 0.94339,
+"valReal": "  668",
+"fillKey": "[629 - 978)" 
+},
+"OAX": {
+ "year": 2007,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor": 1110.1,
+"value": 0.94339,
+"valReal": "1,177",
+"fillKey": "[978 - 1,482)" 
+},
+"COL": {
+ "year": 2007,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":  180.3,
+"value": 0.94339,
+"valReal": "  191",
+"fillKey": "[0 - 373)" 
+},
+"CHIS": {
+ "year": 2007,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor": 1361.2,
+"value": 0.94339,
+"valReal": "1,443",
+"fillKey": "[978 - 1,482)" 
+},
+"TLA": {
+ "year": 2007,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  339.8,
+"value": 0.94339,
+"valReal": "  360",
+"fillKey": "[0 - 373)" 
+},
+"CHIH": {
+ "year": 2007,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor": 1027.3,
+"value": 0.94339,
+"valReal": "1,089",
+"fillKey": "[978 - 1,482)" 
+},
+"DF": {
+ "year": 2007,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor": 2707.9,
+"value": 0.94339,
+"valReal": "2,870",
+"fillKey": "[1,482 - 6,446]" 
+},
+"DUR": {
+ "year": 2007,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  478.2,
+"value": 0.94339,
+"valReal": "  507",
+"fillKey": "[373 - 629)" 
+},
+"ZAC": {
+ "year": 2007,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  432.2,
+"value": 0.94339,
+"valReal": "  458",
+"fillKey": "[373 - 629)" 
+},
+"GTO": {
+ "year": 2007,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor": 1551.1,
+"value": 0.94339,
+"valReal": "1,644",
+"fillKey": "[1,482 - 6,446]" 
+},
+"GRO": {
+ "year": 2007,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor":  985.2,
+"value": 0.94339,
+"valReal": "1,044",
+"fillKey": "[978 - 1,482)" 
+},
+"NL": {
+ "year": 2007,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor":   1335,
+"value": 0.94339,
+"valReal": "1,415",
+"fillKey": "[978 - 1,482)" 
+},
+"HGO": {
+ "year": 2007,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":  743.7,
+"value": 0.94339,
+"valReal": "  788",
+"fillKey": "[629 - 978)" 
+},
+"JAL": {
+ "year": 2007,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor":   2136,
+"value": 0.94339,
+"valReal": "2,264",
+"fillKey": "[1,482 - 6,446]" 
+},
+"MEX": {
+ "year": 2007,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 4436.4,
+"value": 0.94339,
+"valReal": "4,703",
+"fillKey": "[1,482 - 6,446]" 
+},
+"MICH": {
+ "year": 2007,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor": 1251.5,
+"value": 0.94339,
+"valReal": "1,327",
+"fillKey": "[978 - 1,482)" 
+},
+"SLP": {
+ "year": 2007,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  764.5,
+"value": 0.94339,
+"valReal": "  810",
+"fillKey": "[629 - 978)" 
+},
+"MOR": {
+ "year": 2007,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  510.2,
+"value": 0.94339,
+"valReal": "  541",
+"fillKey": "[373 - 629)" 
+},
+"NAY": {
+ "year": 2007,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":  300.3,
+"value": 0.94339,
+"valReal": "  318",
+"fillKey": "[0 - 373)" 
+},
+"PUE": {
+ "year": 2007,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 1709.6,
+"value": 0.94339,
+"valReal": "1,812",
+"fillKey": "[1,482 - 6,446]" 
+},
+"QR": {
+ "year": 2007,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  507.7,
+"value": 0.94339,
+"valReal": "  538",
+"fillKey": "[373 - 629)" 
+},
+"VER": {
+ "year": 2007,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 2254.8,
+"value": 0.94339,
+"valReal": "2,390",
+"fillKey": "[1,482 - 6,446]" 
+},
+"TAM": {
+ "year": 2007,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor":  959.7,
+"value": 0.94339,
+"valReal": "1,017",
+"fillKey": "[978 - 1,482)" 
+},
+"BC": {
+ "year": 2007,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor":  905.3,
+"value": 0.94339,
+"valReal": "  960",
+"fillKey": "[629 - 978)" 
+},
+"QROO": {
+ "year": 2007,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  365.6,
+"value": 0.94339,
+"valReal": "  388",
+"fillKey": "[373 - 629)" 
+},
+"AGS": {
+ "year": 2007,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  339.4,
+"value": 0.94339,
+"valReal": "  360",
+"fillKey": "[0 - 373)" 
+},
+"YUC": {
+ "year": 2007,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":  577.3,
+"value": 0.94339,
+"valReal": "  612",
+"fillKey": "[373 - 629)" 
+} 
+},
+"2008": {
+ "TAM": {
+ "year": 2008,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor": 1157.4,
+"value":      1,
+"valReal": "1,157",
+"fillKey": "[978 - 1,482)" 
+},
+"YUC": {
+ "year": 2008,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":  696.2,
+"value":      1,
+"valReal": "  696",
+"fillKey": "[629 - 978)" 
+},
+"BCS": {
+ "year": 2008,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":    200,
+"value":      1,
+"valReal": "  200",
+"fillKey": "[0 - 373)" 
+},
+"MOR": {
+ "year": 2008,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":    612,
+"value":      1,
+"valReal": "  612",
+"fillKey": "[373 - 629)" 
+},
+"SIN": {
+ "year": 2008,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":  980.5,
+"value":      1,
+"valReal": "  980",
+"fillKey": "[978 - 1,482)" 
+},
+"NL": {
+ "year": 2008,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor":   1611,
+"value":      1,
+"valReal": "1,611",
+"fillKey": "[1,482 - 6,446]" 
+},
+"DUR": {
+ "year": 2008,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  570.7,
+"value":      1,
+"valReal": "  571",
+"fillKey": "[373 - 629)" 
+},
+"ZAC": {
+ "year": 2008,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  512.7,
+"value":      1,
+"valReal": "  513",
+"fillKey": "[373 - 629)" 
+},
+"AGS": {
+ "year": 2008,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  411.1,
+"value":      1,
+"valReal": "  411",
+"fillKey": "[373 - 629)" 
+},
+"COL": {
+ "year": 2008,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":  217.5,
+"value":      1,
+"valReal": "  218",
+"fillKey": "[0 - 373)" 
+},
+"NAY": {
+ "year": 2008,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":  357.7,
+"value":      1,
+"valReal": "  358",
+"fillKey": "[0 - 373)" 
+},
+"CAM": {
+ "year": 2008,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  288.8,
+"value":      1,
+"valReal": "  289",
+"fillKey": "[0 - 373)" 
+},
+"SLP": {
+ "year": 2008,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  913.4,
+"value":      1,
+"valReal": "  913",
+"fillKey": "[629 - 978)" 
+},
+"BC": {
+ "year": 2008,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor": 1114.2,
+"value":      1,
+"valReal": "1,114",
+"fillKey": "[978 - 1,482)" 
+},
+"COA": {
+ "year": 2008,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor":  955.9,
+"value":      1,
+"valReal": "  956",
+"fillKey": "[629 - 978)" 
+},
+"SON": {
+ "year": 2008,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":  914.8,
+"value":      1,
+"valReal": "  915",
+"fillKey": "[629 - 978)" 
+},
+"TAB": {
+ "year": 2008,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":    753,
+"value":      1,
+"valReal": "  753",
+"fillKey": "[629 - 978)" 
+},
+"HGO": {
+ "year": 2008,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":  889.2,
+"value":      1,
+"valReal": "  889",
+"fillKey": "[629 - 978)" 
+},
+"MEX": {
+ "year": 2008,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 5362.8,
+"value":      1,
+"valReal": "5,363",
+"fillKey": "[1,482 - 6,446]" 
+},
+"QR": {
+ "year": 2008,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  616.8,
+"value":      1,
+"valReal": "  617",
+"fillKey": "[373 - 629)" 
+},
+"CHIH": {
+ "year": 2008,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor": 1235.3,
+"value":      1,
+"valReal": "1,235",
+"fillKey": "[978 - 1,482)" 
+},
+"GTO": {
+ "year": 2008,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor": 1853.7,
+"value":      1,
+"valReal": "1,854",
+"fillKey": "[1,482 - 6,446]" 
+},
+"TLA": {
+ "year": 2008,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  410.3,
+"value":      1,
+"valReal": "  410",
+"fillKey": "[373 - 629)" 
+},
+"OAX": {
+ "year": 2008,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor": 1317.6,
+"value":      1,
+"valReal": "1,318",
+"fillKey": "[978 - 1,482)" 
+},
+"PUE": {
+ "year": 2008,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 2056.7,
+"value":      1,
+"valReal": "2,057",
+"fillKey": "[1,482 - 6,446]" 
+},
+"JAL": {
+ "year": 2008,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor": 2562.7,
+"value":      1,
+"valReal": "2,563",
+"fillKey": "[1,482 - 6,446]" 
+},
+"GRO": {
+ "year": 2008,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor": 1167.9,
+"value":      1,
+"valReal": "1,168",
+"fillKey": "[978 - 1,482)" 
+},
+"MICH": {
+ "year": 2008,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor": 1479.5,
+"value":      1,
+"valReal": "1,480",
+"fillKey": "[978 - 1,482)" 
+},
+"CHIS": {
+ "year": 2008,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor": 1638.4,
+"value":      1,
+"valReal": "1,638",
+"fillKey": "[1,482 - 6,446]" 
+},
+"QROO": {
+ "year": 2008,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  454.9,
+"value":      1,
+"valReal": "  455",
+"fillKey": "[373 - 629)" 
+},
+"DF": {
+ "year": 2008,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor": 3252.2,
+"value":      1,
+"valReal": "3,252",
+"fillKey": "[1,482 - 6,446]" 
+},
+"VER": {
+ "year": 2008,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 2686.6,
+"value":      1,
+"valReal": "2,687",
+"fillKey": "[1,482 - 6,446]" 
+} 
+},
+"2009": {
+ "PUE": {
+ "year": 2009,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 2144.2,
+"value": 1.0354,
+"valReal": "2,071",
+"fillKey": "[1,482 - 6,446]" 
+},
+"GTO": {
+ "year": 2009,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor": 1922.6,
+"value": 1.0354,
+"valReal": "1,857",
+"fillKey": "[1,482 - 6,446]" 
+},
+"DUR": {
+ "year": 2009,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  591.4,
+"value": 1.0354,
+"valReal": "  571",
+"fillKey": "[373 - 629)" 
+},
+"CHIS": {
+ "year": 2009,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor": 1709.2,
+"value": 1.0354,
+"valReal": "1,651",
+"fillKey": "[1,482 - 6,446]" 
+},
+"COA": {
+ "year": 2009,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor":    997,
+"value": 1.0354,
+"valReal": "  963",
+"fillKey": "[629 - 978)" 
+},
+"SLP": {
+ "year": 2009,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  947.2,
+"value": 1.0354,
+"valReal": "  915",
+"fillKey": "[629 - 978)" 
+},
+"YUC": {
+ "year": 2009,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":  727.6,
+"value": 1.0354,
+"valReal": "  703",
+"fillKey": "[629 - 978)" 
+},
+"SIN": {
+ "year": 2009,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor": 1013.7,
+"value": 1.0354,
+"valReal": "  979",
+"fillKey": "[978 - 1,482)" 
+},
+"TAB": {
+ "year": 2009,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":  781.2,
+"value": 1.0354,
+"valReal": "  755",
+"fillKey": "[629 - 978)" 
+},
+"CHIH": {
+ "year": 2009,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor": 1287.4,
+"value": 1.0354,
+"valReal": "1,243",
+"fillKey": "[978 - 1,482)" 
+},
+"OAX": {
+ "year": 2009,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor": 1359.4,
+"value": 1.0354,
+"valReal": "1,313",
+"fillKey": "[978 - 1,482)" 
+},
+"MICH": {
+ "year": 2009,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor": 1521.6,
+"value": 1.0354,
+"valReal": "1,470",
+"fillKey": "[978 - 1,482)" 
+},
+"BCS": {
+ "year": 2009,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":  211.7,
+"value": 1.0354,
+"valReal": "  204",
+"fillKey": "[0 - 373)" 
+},
+"MOR": {
+ "year": 2009,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  636.6,
+"value": 1.0354,
+"valReal": "  615",
+"fillKey": "[373 - 629)" 
+},
+"COL": {
+ "year": 2009,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":  227.4,
+"value": 1.0354,
+"valReal": "  220",
+"fillKey": "[0 - 373)" 
+},
+"GRO": {
+ "year": 2009,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor": 1203.6,
+"value": 1.0354,
+"valReal": "1,162",
+"fillKey": "[978 - 1,482)" 
+},
+"TAM": {
+ "year": 2009,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor": 1209.2,
+"value": 1.0354,
+"valReal": "1,168",
+"fillKey": "[978 - 1,482)" 
+},
+"JAL": {
+ "year": 2009,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor": 2666.6,
+"value": 1.0354,
+"valReal": "2,576",
+"fillKey": "[1,482 - 6,446]" 
+},
+"MEX": {
+ "year": 2009,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 5611.9,
+"value": 1.0354,
+"valReal": "5,420",
+"fillKey": "[1,482 - 6,446]" 
+},
+"VER": {
+ "year": 2009,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 2779.7,
+"value": 1.0354,
+"valReal": "2,685",
+"fillKey": "[1,482 - 6,446]" 
+},
+"QROO": {
+ "year": 2009,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  487.2,
+"value": 1.0354,
+"valReal": "  471",
+"fillKey": "[373 - 629)" 
+},
+"CAM": {
+ "year": 2009,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  301.6,
+"value": 1.0354,
+"valReal": "  291",
+"fillKey": "[0 - 373)" 
+},
+"HGO": {
+ "year": 2009,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":  922.6,
+"value": 1.0354,
+"valReal": "  891",
+"fillKey": "[629 - 978)" 
+},
+"SON": {
+ "year": 2009,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":  953.1,
+"value": 1.0354,
+"valReal": "  921",
+"fillKey": "[629 - 978)" 
+},
+"TLA": {
+ "year": 2009,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  429.3,
+"value": 1.0354,
+"valReal": "  415",
+"fillKey": "[373 - 629)" 
+},
+"AGS": {
+ "year": 2009,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  431.1,
+"value": 1.0354,
+"valReal": "  416",
+"fillKey": "[373 - 629)" 
+},
+"NL": {
+ "year": 2009,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor": 1683.9,
+"value": 1.0354,
+"valReal": "1,626",
+"fillKey": "[1,482 - 6,446]" 
+},
+"DF": {
+ "year": 2009,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor": 3386.7,
+"value": 1.0354,
+"valReal": "3,271",
+"fillKey": "[1,482 - 6,446]" 
+},
+"NAY": {
+ "year": 2009,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":  370.2,
+"value": 1.0354,
+"valReal": "  358",
+"fillKey": "[0 - 373)" 
+},
+"ZAC": {
+ "year": 2009,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  528.6,
+"value": 1.0354,
+"valReal": "  511",
+"fillKey": "[373 - 629)" 
+},
+"QR": {
+ "year": 2009,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  648.3,
+"value": 1.0354,
+"valReal": "  626",
+"fillKey": "[373 - 629)" 
+},
+"BC": {
+ "year": 2009,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor": 1182.7,
+"value": 1.0354,
+"valReal": "1,142",
+"fillKey": "[978 - 1,482)" 
+} 
+},
+"2010": {
+ "ZAC": {
+ "year": 2010,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  543.1,
+"value": 1.0818,
+"valReal": "  502",
+"fillKey": "[373 - 629)" 
+},
+"PUE": {
+ "year": 2010,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 2227.6,
+"value": 1.0818,
+"valReal": "2,059",
+"fillKey": "[1,482 - 6,446]" 
+},
+"SLP": {
+ "year": 2010,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor":  978.8,
+"value": 1.0818,
+"valReal": "  905",
+"fillKey": "[629 - 978)" 
+},
+"BCS": {
+ "year": 2010,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":  223.3,
+"value": 1.0818,
+"valReal": "  206",
+"fillKey": "[0 - 373)" 
+},
+"MOR": {
+ "year": 2010,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":    660,
+"value": 1.0818,
+"valReal": "  610",
+"fillKey": "[373 - 629)" 
+},
+"COA": {
+ "year": 2010,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor": 1036.3,
+"value": 1.0818,
+"valReal": "  958",
+"fillKey": "[629 - 978)" 
+},
+"SON": {
+ "year": 2010,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor":  989.5,
+"value": 1.0818,
+"valReal": "  915",
+"fillKey": "[629 - 978)" 
+},
+"TAM": {
+ "year": 2010,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor": 1258.9,
+"value": 1.0818,
+"valReal": "1,164",
+"fillKey": "[978 - 1,482)" 
+},
+"HGO": {
+ "year": 2010,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor":    954,
+"value": 1.0818,
+"valReal": "  882",
+"fillKey": "[629 - 978)" 
+},
+"CHIS": {
+ "year": 2010,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor": 1776.8,
+"value": 1.0818,
+"valReal": "1,642",
+"fillKey": "[1,482 - 6,446]" 
+},
+"JAL": {
+ "year": 2010,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor": 2765.1,
+"value": 1.0818,
+"valReal": "2,556",
+"fillKey": "[1,482 - 6,446]" 
+},
+"OAX": {
+ "year": 2010,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor": 1397.8,
+"value": 1.0818,
+"valReal": "1,292",
+"fillKey": "[978 - 1,482)" 
+},
+"MEX": {
+ "year": 2010,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 5851.1,
+"value": 1.0818,
+"valReal": "5,409",
+"fillKey": "[1,482 - 6,446]" 
+},
+"DUR": {
+ "year": 2010,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  610.7,
+"value": 1.0818,
+"valReal": "  565",
+"fillKey": "[373 - 629)" 
+},
+"COL": {
+ "year": 2010,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":    237,
+"value": 1.0818,
+"valReal": "  219",
+"fillKey": "[0 - 373)" 
+},
+"CAM": {
+ "year": 2010,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  313.8,
+"value": 1.0818,
+"valReal": "  290",
+"fillKey": "[0 - 373)" 
+},
+"SIN": {
+ "year": 2010,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor": 1044.5,
+"value": 1.0818,
+"valReal": "  966",
+"fillKey": "[629 - 978)" 
+},
+"QROO": {
+ "year": 2010,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  519.7,
+"value": 1.0818,
+"valReal": "  480",
+"fillKey": "[373 - 629)" 
+},
+"NL": {
+ "year": 2010,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor": 1753.9,
+"value": 1.0818,
+"valReal": "1,621",
+"fillKey": "[1,482 - 6,446]" 
+},
+"CHIH": {
+ "year": 2010,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor": 1336.8,
+"value": 1.0818,
+"valReal": "1,236",
+"fillKey": "[978 - 1,482)" 
+},
+"GTO": {
+ "year": 2010,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor": 1987.2,
+"value": 1.0818,
+"valReal": "1,837",
+"fillKey": "[1,482 - 6,446]" 
+},
+"DF": {
+ "year": 2010,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor": 3514.6,
+"value": 1.0818,
+"valReal": "3,249",
+"fillKey": "[1,482 - 6,446]" 
+},
+"BC": {
+ "year": 2010,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor": 1250.7,
+"value": 1.0818,
+"valReal": "1,156",
+"fillKey": "[978 - 1,482)" 
+},
+"NAY": {
+ "year": 2010,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":  381.8,
+"value": 1.0818,
+"valReal": "  353",
+"fillKey": "[0 - 373)" 
+},
+"VER": {
+ "year": 2010,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 2866.4,
+"value": 1.0818,
+"valReal": "2,650",
+"fillKey": "[1,482 - 6,446]" 
+},
+"YUC": {
+ "year": 2010,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":  757.9,
+"value": 1.0818,
+"valReal": "  701",
+"fillKey": "[629 - 978)" 
+},
+"GRO": {
+ "year": 2010,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor": 1236.1,
+"value": 1.0818,
+"valReal": "1,143",
+"fillKey": "[978 - 1,482)" 
+},
+"MICH": {
+ "year": 2010,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor": 1559.9,
+"value": 1.0818,
+"valReal": "1,442",
+"fillKey": "[978 - 1,482)" 
+},
+"QR": {
+ "year": 2010,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  678.9,
+"value": 1.0818,
+"valReal": "  628",
+"fillKey": "[373 - 629)" 
+},
+"TAB": {
+ "year": 2010,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":  807.8,
+"value": 1.0818,
+"valReal": "  747",
+"fillKey": "[629 - 978)" 
+},
+"AGS": {
+ "year": 2010,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  450.4,
+"value": 1.0818,
+"valReal": "  416",
+"fillKey": "[373 - 629)" 
+},
+"TLA": {
+ "year": 2010,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  447.5,
+"value": 1.0818,
+"valReal": "  414",
+"fillKey": "[373 - 629)" 
+} 
+},
+"2011": {
+ "ZAC": {
+ "year": 2011,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  629.3,
+"value":  1.139,
+"valReal": "  552",
+"fillKey": "[373 - 629)" 
+},
+"NAY": {
+ "year": 2011,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":    458,
+"value":  1.139,
+"valReal": "  402",
+"fillKey": "[373 - 629)" 
+},
+"SIN": {
+ "year": 2011,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor": 1168.4,
+"value":  1.139,
+"valReal": "1,026",
+"fillKey": "[978 - 1,482)" 
+},
+"HGO": {
+ "year": 2011,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor": 1125.1,
+"value":  1.139,
+"valReal": "  988",
+"fillKey": "[978 - 1,482)" 
+},
+"CAM": {
+ "year": 2011,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":    347,
+"value":  1.139,
+"valReal": "  305",
+"fillKey": "[0 - 373)" 
+},
+"CHIH": {
+ "year": 2011,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor": 1435.8,
+"value":  1.139,
+"valReal": "1,261",
+"fillKey": "[978 - 1,482)" 
+},
+"DUR": {
+ "year": 2011,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  689.3,
+"value":  1.139,
+"valReal": "  605",
+"fillKey": "[373 - 629)" 
+},
+"SLP": {
+ "year": 2011,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor": 1091.6,
+"value":  1.139,
+"valReal": "  958",
+"fillKey": "[629 - 978)" 
+},
+"BCS": {
+ "year": 2011,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":  268.9,
+"value":  1.139,
+"valReal": "  236",
+"fillKey": "[0 - 373)" 
+},
+"TLA": {
+ "year": 2011,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  493.9,
+"value":  1.139,
+"valReal": "  434",
+"fillKey": "[373 - 629)" 
+},
+"MEX": {
+ "year": 2011,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor":   6406,
+"value":  1.139,
+"valReal": "5,624",
+"fillKey": "[1,482 - 6,446]" 
+},
+"PUE": {
+ "year": 2011,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 2439.7,
+"value":  1.139,
+"valReal": "2,142",
+"fillKey": "[1,482 - 6,446]" 
+},
+"SON": {
+ "year": 2011,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor": 1123.9,
+"value":  1.139,
+"valReal": "  987",
+"fillKey": "[978 - 1,482)" 
+},
+"GRO": {
+ "year": 2011,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor": 1429.7,
+"value":  1.139,
+"valReal": "1,255",
+"fillKey": "[978 - 1,482)" 
+},
+"TAB": {
+ "year": 2011,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor":  945.2,
+"value":  1.139,
+"valReal": "  830",
+"fillKey": "[629 - 978)" 
+},
+"AGS": {
+ "year": 2011,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  500.2,
+"value":  1.139,
+"valReal": "  439",
+"fillKey": "[373 - 629)" 
+},
+"JAL": {
+ "year": 2011,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor":   3103,
+"value":  1.139,
+"valReal": "2,724",
+"fillKey": "[1,482 - 6,446]" 
+},
+"GTO": {
+ "year": 2011,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor":   2316,
+"value":  1.139,
+"valReal": "2,033",
+"fillKey": "[1,482 - 6,446]" 
+},
+"YUC": {
+ "year": 2011,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":  824.5,
+"value":  1.139,
+"valReal": "  724",
+"fillKey": "[629 - 978)" 
+},
+"MOR": {
+ "year": 2011,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  750.1,
+"value":  1.139,
+"valReal": "  659",
+"fillKey": "[629 - 978)" 
+},
+"COA": {
+ "year": 2011,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor": 1160.3,
+"value":  1.139,
+"valReal": "1,019",
+"fillKey": "[978 - 1,482)" 
+},
+"QR": {
+ "year": 2011,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  771.7,
+"value":  1.139,
+"valReal": "  678",
+"fillKey": "[629 - 978)" 
+},
+"BC": {
+ "year": 2011,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor": 1331.6,
+"value":  1.139,
+"valReal": "1,169",
+"fillKey": "[978 - 1,482)" 
+},
+"QROO": {
+ "year": 2011,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  559.1,
+"value":  1.139,
+"valReal": "  491",
+"fillKey": "[373 - 629)" 
+},
+"DF": {
+ "year": 2011,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor": 3945.4,
+"value":  1.139,
+"valReal": "3,464",
+"fillKey": "[1,482 - 6,446]" 
+},
+"TAM": {
+ "year": 2011,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor": 1380.6,
+"value":  1.139,
+"valReal": "1,212",
+"fillKey": "[978 - 1,482)" 
+},
+"VER": {
+ "year": 2011,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 3224.6,
+"value":  1.139,
+"valReal": "2,831",
+"fillKey": "[1,482 - 6,446]" 
+},
+"NL": {
+ "year": 2011,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor": 1960.3,
+"value":  1.139,
+"valReal": "1,721",
+"fillKey": "[1,482 - 6,446]" 
+},
+"CHIS": {
+ "year": 2011,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor": 2023.6,
+"value":  1.139,
+"valReal": "1,777",
+"fillKey": "[1,482 - 6,446]" 
+},
+"OAX": {
+ "year": 2011,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor":   1605,
+"value":  1.139,
+"valReal": "1,409",
+"fillKey": "[978 - 1,482)" 
+},
+"COL": {
+ "year": 2011,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":  274.5,
+"value":  1.139,
+"valReal": "  241",
+"fillKey": "[0 - 373)" 
+},
+"MICH": {
+ "year": 2011,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor": 1835.7,
+"value":  1.139,
+"valReal": "1,612",
+"fillKey": "[1,482 - 6,446]" 
+} 
+},
+"2012": {
+ "GTO": {
+ "year": 2012,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor": 2469.3,
+"value": 1.1756,
+"valReal": "2,101",
+"fillKey": "[1,482 - 6,446]" 
+},
+"COA": {
+ "year": 2012,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor": 1239.3,
+"value": 1.1756,
+"valReal": "1,054",
+"fillKey": "[978 - 1,482)" 
+},
+"PUE": {
+ "year": 2012,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 2591.6,
+"value": 1.1756,
+"valReal": "2,205",
+"fillKey": "[1,482 - 6,446]" 
+},
+"ZAC": {
+ "year": 2012,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  665.9,
+"value": 1.1756,
+"valReal": "  566",
+"fillKey": "[373 - 629)" 
+},
+"MICH": {
+ "year": 2012,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor": 1941.6,
+"value": 1.1756,
+"valReal": "1,652",
+"fillKey": "[1,482 - 6,446]" 
+},
+"BCS": {
+ "year": 2012,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":  294.8,
+"value": 1.1756,
+"valReal": "  251",
+"fillKey": "[0 - 373)" 
+},
+"TAM": {
+ "year": 2012,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor": 1472.6,
+"value": 1.1756,
+"valReal": "1,253",
+"fillKey": "[978 - 1,482)" 
+},
+"SIN": {
+ "year": 2012,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":   1235,
+"value": 1.1756,
+"valReal": "1,051",
+"fillKey": "[978 - 1,482)" 
+},
+"COL": {
+ "year": 2012,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":  293.4,
+"value": 1.1756,
+"valReal": "  250",
+"fillKey": "[0 - 373)" 
+},
+"BC": {
+ "year": 2012,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor": 1432.2,
+"value": 1.1756,
+"valReal": "1,218",
+"fillKey": "[978 - 1,482)" 
+},
+"CHIS": {
+ "year": 2012,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor": 2168.5,
+"value": 1.1756,
+"valReal": "1,845",
+"fillKey": "[1,482 - 6,446]" 
+},
+"MEX": {
+ "year": 2012,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 6818.4,
+"value": 1.1756,
+"valReal": "5,800",
+"fillKey": "[1,482 - 6,446]" 
+},
+"NAY": {
+ "year": 2012,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":  488.4,
+"value": 1.1756,
+"valReal": "  415",
+"fillKey": "[373 - 629)" 
+},
+"CAM": {
+ "year": 2012,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  370.7,
+"value": 1.1756,
+"valReal": "  315",
+"fillKey": "[0 - 373)" 
+},
+"YUC": {
+ "year": 2012,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":  880.4,
+"value": 1.1756,
+"valReal": "  749",
+"fillKey": "[629 - 978)" 
+},
+"MOR": {
+ "year": 2012,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  797.2,
+"value": 1.1756,
+"valReal": "  678",
+"fillKey": "[629 - 978)" 
+},
+"DUR": {
+ "year": 2012,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  731.4,
+"value": 1.1756,
+"valReal": "  622",
+"fillKey": "[373 - 629)" 
+},
+"CHIH": {
+ "year": 2012,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor": 1523.9,
+"value": 1.1756,
+"valReal": "1,296",
+"fillKey": "[978 - 1,482)" 
+},
+"VER": {
+ "year": 2012,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 3415.9,
+"value": 1.1756,
+"valReal": "2,906",
+"fillKey": "[1,482 - 6,446]" 
+},
+"GRO": {
+ "year": 2012,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor": 1513.6,
+"value": 1.1756,
+"valReal": "1,288",
+"fillKey": "[978 - 1,482)" 
+},
+"TAB": {
+ "year": 2012,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor": 1008.2,
+"value": 1.1756,
+"valReal": "  858",
+"fillKey": "[629 - 978)" 
+},
+"SON": {
+ "year": 2012,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor": 1201.1,
+"value": 1.1756,
+"valReal": "1,022",
+"fillKey": "[978 - 1,482)" 
+},
+"TLA": {
+ "year": 2012,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  528.5,
+"value": 1.1756,
+"valReal": "  450",
+"fillKey": "[373 - 629)" 
+},
+"HGO": {
+ "year": 2012,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor": 1201.2,
+"value": 1.1756,
+"valReal": "1,022",
+"fillKey": "[978 - 1,482)" 
+},
+"DF": {
+ "year": 2012,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor": 4203.5,
+"value": 1.1756,
+"valReal": "3,576",
+"fillKey": "[1,482 - 6,446]" 
+},
+"SLP": {
+ "year": 2012,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor": 1157.7,
+"value": 1.1756,
+"valReal": "  985",
+"fillKey": "[978 - 1,482)" 
+},
+"NL": {
+ "year": 2012,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor": 2101.8,
+"value": 1.1756,
+"valReal": "1,788",
+"fillKey": "[1,482 - 6,446]" 
+},
+"JAL": {
+ "year": 2012,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor": 3303.9,
+"value": 1.1756,
+"valReal": "2,810",
+"fillKey": "[1,482 - 6,446]" 
+},
+"AGS": {
+ "year": 2012,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  537.3,
+"value": 1.1756,
+"valReal": "  457",
+"fillKey": "[373 - 629)" 
+},
+"QR": {
+ "year": 2012,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  832.3,
+"value": 1.1756,
+"valReal": "  708",
+"fillKey": "[629 - 978)" 
+},
+"OAX": {
+ "year": 2012,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor": 1699.1,
+"value": 1.1756,
+"valReal": "1,445",
+"fillKey": "[978 - 1,482)" 
+},
+"QROO": {
+ "year": 2012,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  614.1,
+"value": 1.1756,
+"valReal": "  522",
+"fillKey": "[373 - 629)" 
+} 
+},
+"2013": {
+ "PUE": {
+ "year": 2013,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 2773.1,
+"value": 1.1996,
+"valReal": "2,312",
+"fillKey": "[1,482 - 6,446]" 
+},
+"AGS": {
+ "year": 2013,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  580.3,
+"value": 1.1996,
+"valReal": "  484",
+"fillKey": "[373 - 629)" 
+},
+"BCS": {
+ "year": 2013,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":  324.1,
+"value": 1.1996,
+"valReal": "  270",
+"fillKey": "[0 - 373)" 
+},
+"TAM": {
+ "year": 2013,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor": 1582.1,
+"value": 1.1996,
+"valReal": "1,319",
+"fillKey": "[978 - 1,482)" 
+},
+"CHIS": {
+ "year": 2013,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor": 2336.6,
+"value": 1.1996,
+"valReal": "1,948",
+"fillKey": "[1,482 - 6,446]" 
+},
+"ZAC": {
+ "year": 2013,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  710.2,
+"value": 1.1996,
+"valReal": "  592",
+"fillKey": "[373 - 629)" 
+},
+"DUR": {
+ "year": 2013,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  781.8,
+"value": 1.1996,
+"valReal": "  652",
+"fillKey": "[629 - 978)" 
+},
+"CAM": {
+ "year": 2013,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  398.4,
+"value": 1.1996,
+"valReal": "  332",
+"fillKey": "[0 - 373)" 
+},
+"NAY": {
+ "year": 2013,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":  524.4,
+"value": 1.1996,
+"valReal": "  437",
+"fillKey": "[373 - 629)" 
+},
+"JAL": {
+ "year": 2013,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor": 3542.5,
+"value": 1.1996,
+"valReal": "2,953",
+"fillKey": "[1,482 - 6,446]" 
+},
+"COL": {
+ "year": 2013,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":  315.6,
+"value": 1.1996,
+"valReal": "  263",
+"fillKey": "[0 - 373)" 
+},
+"HGO": {
+ "year": 2013,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor": 1291.1,
+"value": 1.1996,
+"valReal": "1,076",
+"fillKey": "[978 - 1,482)" 
+},
+"MICH": {
+ "year": 2013,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor": 2069.1,
+"value": 1.1996,
+"valReal": "1,725",
+"fillKey": "[1,482 - 6,446]" 
+},
+"SLP": {
+ "year": 2013,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor": 1237.3,
+"value": 1.1996,
+"valReal": "1,031",
+"fillKey": "[978 - 1,482)" 
+},
+"TAB": {
+ "year": 2013,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor": 1082.8,
+"value": 1.1996,
+"valReal": "  903",
+"fillKey": "[629 - 978)" 
+},
+"SON": {
+ "year": 2013,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor": 1291.9,
+"value": 1.1996,
+"valReal": "1,077",
+"fillKey": "[978 - 1,482)" 
+},
+"COA": {
+ "year": 2013,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor": 1332.4,
+"value": 1.1996,
+"valReal": "1,111",
+"fillKey": "[978 - 1,482)" 
+},
+"MOR": {
+ "year": 2013,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  853.4,
+"value": 1.1996,
+"valReal": "  711",
+"fillKey": "[629 - 978)" 
+},
+"QR": {
+ "year": 2013,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  902.2,
+"value": 1.1996,
+"valReal": "  752",
+"fillKey": "[629 - 978)" 
+},
+"SIN": {
+ "year": 2013,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor":   1316,
+"value": 1.1996,
+"valReal": "1,097",
+"fillKey": "[978 - 1,482)" 
+},
+"YUC": {
+ "year": 2013,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor":  945.3,
+"value": 1.1996,
+"valReal": "  788",
+"fillKey": "[629 - 978)" 
+},
+"NL": {
+ "year": 2013,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor":   2263,
+"value": 1.1996,
+"valReal": "1,887",
+"fillKey": "[1,482 - 6,446]" 
+},
+"GRO": {
+ "year": 2013,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor": 1614.2,
+"value": 1.1996,
+"valReal": "1,346",
+"fillKey": "[978 - 1,482)" 
+},
+"OAX": {
+ "year": 2013,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor": 1812.9,
+"value": 1.1996,
+"valReal": "1,511",
+"fillKey": "[1,482 - 6,446]" 
+},
+"DF": {
+ "year": 2013,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor": 4508.5,
+"value": 1.1996,
+"valReal": "3,758",
+"fillKey": "[1,482 - 6,446]" 
+},
+"TLA": {
+ "year": 2013,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  569.1,
+"value": 1.1996,
+"valReal": "  474",
+"fillKey": "[373 - 629)" 
+},
+"GTO": {
+ "year": 2013,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor": 2650.6,
+"value": 1.1996,
+"valReal": "2,210",
+"fillKey": "[1,482 - 6,446]" 
+},
+"CHIH": {
+ "year": 2013,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor": 1627.4,
+"value": 1.1996,
+"valReal": "1,357",
+"fillKey": "[978 - 1,482)" 
+},
+"QROO": {
+ "year": 2013,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  675.6,
+"value": 1.1996,
+"valReal": "  563",
+"fillKey": "[373 - 629)" 
+},
+"BC": {
+ "year": 2013,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor": 1548.7,
+"value": 1.1996,
+"valReal": "1,291",
+"fillKey": "[978 - 1,482)" 
+},
+"VER": {
+ "year": 2013,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 3644.9,
+"value": 1.1996,
+"valReal": "3,039",
+"fillKey": "[1,482 - 6,446]" 
+},
+"MEX": {
+ "year": 2013,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 7308.3,
+"value": 1.1996,
+"valReal": "6,092",
+"fillKey": "[1,482 - 6,446]" 
+} 
+},
+"2014": {
+ "TLA": {
+ "year": 2014,
+"state_code": 29,
+"long_name": "Tlaxcala",
+"name": "TLA",
+"variable": "r33_fortamun",
+"deflactor":  610.8,
+"value":  1.248,
+"valReal": "  489",
+"fillKey": "[373 - 629)" 
+},
+"TAM": {
+ "year": 2014,
+"state_code": 28,
+"long_name": "Tamaulipas",
+"name": "TAM",
+"variable": "r33_fortamun",
+"deflactor": 1700.7,
+"value":  1.248,
+"valReal": "1,363",
+"fillKey": "[978 - 1,482)" 
+},
+"BCS": {
+ "year": 2014,
+"state_code": 3,
+"long_name": "Baja California Sur",
+"name": "BCS",
+"variable": "r33_fortamun",
+"deflactor":  353.8,
+"value":  1.248,
+"valReal": "  283",
+"fillKey": "[0 - 373)" 
+},
+"COA": {
+ "year": 2014,
+"state_code": 5,
+"long_name": "Coahuila de Zaragoza",
+"name": "COA",
+"variable": "r33_fortamun",
+"deflactor": 1420.1,
+"value":  1.248,
+"valReal": "1,138",
+"fillKey": "[978 - 1,482)" 
+},
+"DUR": {
+ "year": 2014,
+"state_code": 10,
+"long_name": "Durango",
+"name": "DUR",
+"variable": "r33_fortamun",
+"deflactor":  849.1,
+"value":  1.248,
+"valReal": "  680",
+"fillKey": "[629 - 978)" 
+},
+"OAX": {
+ "year": 2014,
+"state_code": 20,
+"long_name": "Oaxaca",
+"name": "OAX",
+"variable": "r33_fortamun",
+"deflactor":   1944,
+"value":  1.248,
+"valReal": "1,558",
+"fillKey": "[1,482 - 6,446]" 
+},
+"MOR": {
+ "year": 2014,
+"state_code": 17,
+"long_name": "Morelos",
+"name": "MOR",
+"variable": "r33_fortamun",
+"deflactor":  920.9,
+"value":  1.248,
+"valReal": "  738",
+"fillKey": "[629 - 978)" 
+},
+"COL": {
+ "year": 2014,
+"state_code": 6,
+"long_name": "Colima",
+"name": "COL",
+"variable": "r33_fortamun",
+"deflactor":  343.4,
+"value":  1.248,
+"valReal": "  275",
+"fillKey": "[0 - 373)" 
+},
+"SON": {
+ "year": 2014,
+"state_code": 26,
+"long_name": "Sonora",
+"name": "SON",
+"variable": "r33_fortamun",
+"deflactor": 1401.5,
+"value":  1.248,
+"valReal": "1,123",
+"fillKey": "[978 - 1,482)" 
+},
+"JAL": {
+ "year": 2014,
+"state_code": 14,
+"long_name": "Jalisco",
+"name": "JAL",
+"variable": "r33_fortamun",
+"deflactor": 3804.4,
+"value":  1.248,
+"valReal": "3,048",
+"fillKey": "[1,482 - 6,446]" 
+},
+"CHIS": {
+ "year": 2014,
+"state_code": 7,
+"long_name": "Chiapas",
+"name": "CHIS",
+"variable": "r33_fortamun",
+"deflactor": 2515.7,
+"value":  1.248,
+"valReal": "2,016",
+"fillKey": "[1,482 - 6,446]" 
+},
+"HGO": {
+ "year": 2014,
+"state_code": 13,
+"long_name": "Hidalgo",
+"name": "HGO",
+"variable": "r33_fortamun",
+"deflactor": 1379.1,
+"value":  1.248,
+"valReal": "1,105",
+"fillKey": "[978 - 1,482)" 
+},
+"MICH": {
+ "year": 2014,
+"state_code": 16,
+"long_name": "Michoacán de Ocampo",
+"name": "MICH",
+"variable": "r33_fortamun",
+"deflactor": 2224.5,
+"value":  1.248,
+"valReal": "1,782",
+"fillKey": "[1,482 - 6,446]" 
+},
+"SIN": {
+ "year": 2014,
+"state_code": 25,
+"long_name": "Sinaloa",
+"name": "SIN",
+"variable": "r33_fortamun",
+"deflactor": 1440.2,
+"value":  1.248,
+"valReal": "1,154",
+"fillKey": "[978 - 1,482)" 
+},
+"VER": {
+ "year": 2014,
+"state_code": 30,
+"long_name": "Veracruz de Ignacio de la Llave",
+"name": "VER",
+"variable": "r33_fortamun",
+"deflactor": 3891.1,
+"value":  1.248,
+"valReal": "3,118",
+"fillKey": "[1,482 - 6,446]" 
+},
+"PUE": {
+ "year": 2014,
+"state_code": 21,
+"long_name": "Puebla",
+"name": "PUE",
+"variable": "r33_fortamun",
+"deflactor": 2980.8,
+"value":  1.248,
+"valReal": "2,388",
+"fillKey": "[1,482 - 6,446]" 
+},
+"YUC": {
+ "year": 2014,
+"state_code": 31,
+"long_name": "Yucatán",
+"name": "YUC",
+"variable": "r33_fortamun",
+"deflactor": 1014.4,
+"value":  1.248,
+"valReal": "  813",
+"fillKey": "[629 - 978)" 
+},
+"SLP": {
+ "year": 2014,
+"state_code": 24,
+"long_name": "San Luis Potosí",
+"name": "SLP",
+"variable": "r33_fortamun",
+"deflactor": 1327.3,
+"value":  1.248,
+"valReal": "1,064",
+"fillKey": "[978 - 1,482)" 
+},
+"NAY": {
+ "year": 2014,
+"state_code": 18,
+"long_name": "Nayarit",
+"name": "NAY",
+"variable": "r33_fortamun",
+"deflactor":  579.5,
+"value":  1.248,
+"valReal": "  464",
+"fillKey": "[373 - 629)" 
+},
+"GRO": {
+ "year": 2014,
+"state_code": 12,
+"long_name": "Guerrero",
+"name": "GRO",
+"variable": "r33_fortamun",
+"deflactor": 1730.3,
+"value":  1.248,
+"valReal": "1,386",
+"fillKey": "[978 - 1,482)" 
+},
+"AGS": {
+ "year": 2014,
+"state_code": 1,
+"long_name": "Aguascalientes",
+"name": "AGS",
+"variable": "r33_fortamun",
+"deflactor":  615.5,
+"value":  1.248,
+"valReal": "  493",
+"fillKey": "[373 - 629)" 
+},
+"QROO": {
+ "year": 2014,
+"state_code": 23,
+"long_name": "Quintana Roo",
+"name": "QROO",
+"variable": "r33_fortamun",
+"deflactor":  731.3,
+"value":  1.248,
+"valReal": "  586",
+"fillKey": "[373 - 629)" 
+},
+"BC": {
+ "year": 2014,
+"state_code": 2,
+"long_name": "Baja California",
+"name": "BC",
+"variable": "r33_fortamun",
+"deflactor":   1662,
+"value":  1.248,
+"valReal": "1,332",
+"fillKey": "[978 - 1,482)" 
+},
+"NL": {
+ "year": 2014,
+"state_code": 19,
+"long_name": "Nuevo León",
+"name": "NL",
+"variable": "r33_fortamun",
+"deflactor": 2428.7,
+"value":  1.248,
+"valReal": "1,946",
+"fillKey": "[1,482 - 6,446]" 
+},
+"CHIH": {
+ "year": 2014,
+"state_code": 8,
+"long_name": "Chihuahua",
+"name": "CHIH",
+"variable": "r33_fortamun",
+"deflactor": 1786.2,
+"value":  1.248,
+"valReal": "1,431",
+"fillKey": "[978 - 1,482)" 
+},
+"ZAC": {
+ "year": 2014,
+"state_code": 32,
+"long_name": "Zacatecas",
+"name": "ZAC",
+"variable": "r33_fortamun",
+"deflactor":  761.3,
+"value":  1.248,
+"valReal": "  610",
+"fillKey": "[373 - 629)" 
+},
+"QR": {
+ "year": 2014,
+"state_code": 22,
+"long_name": "Querétaro",
+"name": "QR",
+"variable": "r33_fortamun",
+"deflactor":  955.6,
+"value":  1.248,
+"valReal": "  766",
+"fillKey": "[629 - 978)" 
+},
+"DF": {
+ "year": 2014,
+"state_code": 9,
+"long_name": "Distrito Federal",
+"name": "DF",
+"variable": "r33_fortamun",
+"deflactor": 4860.8,
+"value":  1.248,
+"valReal": "3,895",
+"fillKey": "[1,482 - 6,446]" 
+},
+"GTO": {
+ "year": 2014,
+"state_code": 11,
+"long_name": "Guanajuato",
+"name": "GTO",
+"variable": "r33_fortamun",
+"deflactor": 2809.3,
+"value":  1.248,
+"valReal": "2,251",
+"fillKey": "[1,482 - 6,446]" 
+},
+"TAB": {
+ "year": 2014,
+"state_code": 27,
+"long_name": "Tabasco",
+"name": "TAB",
+"variable": "r33_fortamun",
+"deflactor": 1146.9,
+"value":  1.248,
+"valReal": "  919",
+"fillKey": "[629 - 978)" 
+},
+"CAM": {
+ "year": 2014,
+"state_code": 4,
+"long_name": "Campeche",
+"name": "CAM",
+"variable": "r33_fortamun",
+"deflactor":  432.7,
+"value":  1.248,
+"valReal": "  347",
+"fillKey": "[0 - 373)" 
+},
+"MEX": {
+ "year": 2014,
+"state_code": 15,
+"long_name": "México",
+"name": "MEX",
+"variable": "r33_fortamun",
+"deflactor": 8044.3,
+"value":  1.248,
+"valReal": "6,446",
+"fillKey": "[1,482 - 6,446]" 
+} 
+} 
+} 
+}
+  chartParams.element = document.getElementById('chart_1')
+  
+  
+  var mapchart_1 = new Datamap(chartParams);
+  
+  
+    
+  // draw a bubble map if specified
+  if (chartParams.bubbles) {
+    var bubbles = chartParams.bubbles
+    mapchart_1.bubbles(bubbles)
+  }
+  
+  if (chartParams.labels){
+    mapchart_1.labels()
+  }
+  
+  if (chartParams.legend){
+    mapchart_1.legend()
+  }
+  
+  setProjection = function( element, options ) {
+    var projection, path;
+ 
+      projection = d3.geo.albersUsa()
+        .scale(element.offsetWidth)
+        .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+ 
+    path = d3.geo.path()
+      .projection( projection );
+ 
+    return {path: path, projection: projection};
+  }
+</script>
+
+<style>
+.datamaps {
+  position: relative;
+}
+</style>
+    
+    <script></script>    
+  </body>
+</html>

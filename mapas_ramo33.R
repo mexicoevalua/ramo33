@@ -70,5 +70,20 @@ r33_fortaestados  <- subset(data, data$variable == "r33_fortaestados")
 #####
 # Desactivar notación científica
 options(scipen=999)
+
 #####
-# Ejecutar scripts para cada mapa por ramo
+# Ejecutar scripts para cada mapa por ramo en el folder "mapas"
+source("scripts_mapas/mapa_r33_total.R")
+source("scripts_mapas/mapa_r33_fasa.R")
+source("scripts_mapas/mapa_r33_fise.R")
+source("scripts_mapas/mapa_r33_multiple.R")
+source("scripts_mapas/mapa_r33_infraeduca.R")
+source("scripts_mapas/mapa_r33_fortamun.R")
+source("scripts_mapas/mapa_r33_segurid.R")
+source("scripts_mapas/mapa_r33_faeb.R")
+source("scripts_mapas/mapa_r33_fis.R")
+source("scripts_mapas/mapa_r33_fism.R")
+source("scripts_mapas/mapa_r33_alimenticio.R")
+source("scripts_mapas/mapa_r33_edusuperior.R")
+source("scripts_mapas/mapa_r33_edutecnologica.R")
+source("scripts_mapas/mapa_r33_fortaestados.R")
