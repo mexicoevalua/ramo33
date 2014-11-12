@@ -12,7 +12,7 @@ table(with(var, cut(valReal,
                            breaks=c(quantile(valReal, probs = seq(0, 1, by = 0.20))), dig.lab = 5, include.lowest=T, right=F)))
 
 # Asignar etiquetas manualmente para evitar notación científica
-l  <-  c("[2,198 - 5,185)","[5,185 - 8,018)","[8,018 - 11,023)","[11,023 - 17,699)","[17,699 - 48,024]")
+l  <-  c("[2,198- 5,185)","[5,185- 8,018)","[8,018- 11,023)","[11,023- 17,699)","[17,699- 48,024]")
 
 # Quitar decimales y ajustar leyenda
 dat <- transform(var,
@@ -75,7 +75,7 @@ d1$set(
   legend = TRUE,
   labels = TRUE
 )
-d1$save(fileName, cdn = TRUE)
+d1$save(paste(fileName,".html",sep=""), cdn = TRUE)
 
 #####
 # Mapa con slider 
@@ -99,4 +99,4 @@ d1$setTemplate(chartDiv = "
   </div>   "
 )
 d1$set(newData = dat2)
-d1$save(fileName, cdn = TRUE)
+d1$save(paste(fileName,".html",sep=""), cdn = TRUE)
