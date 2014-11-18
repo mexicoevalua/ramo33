@@ -37,8 +37,7 @@ data  <- merge(data, def, by.x="yr", by.y="year")
 head(data[data$yr == 2008,])
 data$valReal  <- with(data, value / deflactor, na.rm=T)
 head(data)
-# Datos en miles de millones de pesos
-#data$valReal  <- data$valReal / 1000
+
 #####
 ## Preparar datos para construir mapa interactivo
 # Eliminar obs nacional
