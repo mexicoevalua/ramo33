@@ -27,6 +27,10 @@ names(temp)
 temp  <- melt(temp, id=c("id", "estado","yr","name"))
 head(temp)
 data  <- temp
+head(data)
+data$value  <- gsub(" ","",data$value)
+data$value  <- as.numeric(data$value)
+
 
 ##### 
 ## Transformar a valores reales con el deflactor del Pib base 2008
